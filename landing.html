@@ -1,0 +1,1160 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBM Connect - Find Your Perfect Match</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Animate.css CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- Owl Carousel CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <!-- Custom Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary: #ec4899;
+            --primary-dark: #db2777;
+            --secondary: #f59e0b;
+            --dark: #111827;
+            --dark-light: #1f2937;
+            --light: #f9fafb;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(31, 41, 55, 0.8) 100%),
+                url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+        }
+
+        .cta-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .card-dark {
+            background-color: var(--dark-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-blur {
+            backdrop-filter: blur(10px);
+            background-color: rgba(17, 24, 39, 0.9);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pricing-card {
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--secondary);
+        }
+
+        .member-card {
+            transition: transform 0.3s ease;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .member-card:hover {
+            transform: scale(1.05);
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .success-story {
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .success-story:hover {
+            transform: translateY(-5px);
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .preloader-inner {
+            text-align: center;
+        }
+
+        .preloader-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .preloader-icon span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            margin: 0 5px;
+            animation: bounce 1.5s infinite ease-in-out;
+        }
+
+        .preloader-icon span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .scrollToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scrollToTop.show {
+            opacity: 1;
+        }
+
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .search-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .search-overlay .close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .search-overlay form {
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .search-overlay input {
+            width: 100%;
+            padding: 20px;
+            font-size: 24px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--primary);
+            color: white;
+            text-align: center;
+        }
+
+        .search-overlay input:focus {
+            outline: none;
+        }
+
+        .language-select select {
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 5px;
+        }
+
+        .language-select select:focus {
+            outline: none;
+        }
+
+        .user-profile {
+            position: relative;
+        }
+
+        .user-profile .submenu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--dark-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 10px 0;
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .user-profile:hover .submenu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .user-profile .submenu a {
+            display: block;
+            padding: 8px 20px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .user-profile .submenu a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .header-bar {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .header-bar span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 1024px) {
+            .header-bar {
+                display: flex;
+            }
+
+            .menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: var(--dark-light);
+                flex-direction: column;
+                padding: 80px 20px 20px;
+                transition: all 0.3s ease;
+                z-index: 998;
+            }
+
+            .menu.active {
+                right: 0;
+            }
+
+            .menu li {
+                margin: 15px 0;
+            }
+
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                z-index: 997;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    </style>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ec4899',
+                        'primary-dark': '#db2777',
+                        secondary: '#f59e0b',
+                        dark: '#111827',
+                        'dark-light': '#1f2937',
+                        light: '#f9fafb',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="font-inter">
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Scroll to Top -->
+    <a href="#" class="scrollToTop">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="navbar-blur fixed w-full z-50 py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <!-- Navbar Brand -->
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
+                        <i class="fas fa-heart text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold text-white">BBM <span class="text-primary">Connect</span></span>
+                </div>
+
+                <!-- Desktop Menu
+                <ul class="menu hidden lg:flex items-center space-x-6">
+                    <li>
+                        <a href="#" class="text-white font-medium">Home</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Community</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Membership</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Shop</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">About</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Contact</a>
+                    </li>
+                </ul> -->
+
+                <!-- Auth Buttons -->
+                <div class="hidden lg:flex items-center space-x-4">
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Log
+                        In</a>
+                    <a href="#"
+                        class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg transition-colors duration-300 font-medium">Sign
+                        Up</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="header-bar lg:hidden">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <!-- Mobile Menu -->
+                <ul class="menu lg:hidden">
+                    <!-- <li>
+                        <a href="#" class="text-white font-medium block py-2">Home</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium block py-2">Community</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium block py-2">Membership</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium block py-2">Shop</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium block py-2">About</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium block py-2">Contact</a>
+                    </li> -->
+                    <li class="pt-4 border-t border-gray-700 mt-4">
+                        <a href="#"
+                            class="bg-transparent border border-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-300 font-medium block text-center">Log
+                            In</a>
+                    </li>
+                    <li class="pt-2">
+                        <a href="#"
+                            class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg transition-colors duration-300 font-medium block text-center">Sign
+                            Up</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay">
+        <div class="close"><i class="fas fa-times"></i></div>
+        <form action="#">
+            <input type="text" placeholder="Write what you want..">
+        </form>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center pt-20">
+        <div class="container mx-auto px-4 py-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="text-white">
+                    <h1
+                        class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate__animated animate__fadeInUp">
+                        Find Love & <span class="text-primary">Your Life</span> Partner
+                    </h1>
+
+                    <!-- Join Form -->
+                    <div class="card-dark rounded-2xl p-6 animate__animated animate__fadeInUp animate__delay-1s">
+                        <h3 class="text-2xl font-bold mb-6">Join Now - Find Your Match</h3>
+                        <form>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <!-- Full Name Field -->
+                                <div>
+                                    <label class="block text-gray-300 mb-2">Full Name</label>
+                                    <input type="text"
+                                        class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary"
+                                        placeholder="Enter your full name">
+                                </div>
+
+                                <!-- Age Field -->
+                                <div>
+                                    <label class="block text-gray-300 mb-2">Age</label>
+                                    <select
+                                        class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                        <option>Select your age</option>
+                                        <option>18-24</option>
+                                        <option>25-34</option>
+                                        <option>35-44</option>
+                                        <option>45-54</option>
+                                        <option>55+</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+    <!-- Gender Field -->
+    <div>
+        <label class="block text-gray-300 mb-2">I am a</label>
+        <div class="flex space-x-4">
+            <div class="flex items-center">
+                <input type="radio" name="gender" id="male" class="mr-2">
+                <label for="male" class="text-gray-300">Male</label>
+            </div>
+            <div class="flex items-center">
+                <input type="radio" name="gender" id="female" class="mr-2">
+                <label for="female" class="text-gray-300">Female</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seeking Field -->
+    <div>
+        <label class="block text-gray-300 mb-2">Seeking a</label>
+        <div class="flex space-x-4">
+            <div class="flex items-center">
+                <input type="radio" name="seeking" id="seeking-male" class="mr-2">
+                <label for="seeking-male" class="text-gray-300">Man</label>
+            </div>
+            <div class="flex items-center">
+                <input type="radio" name="seeking" id="seeking-female" class="mr-2">
+                <label for="seeking-female" class="text-gray-300">Woman</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                                <!-- Country Field -->
+                                <div>
+                                    <label class="block text-gray-300 mb-2">Country</label>
+                                    <select
+                                        class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                        <option>Select your country</option>
+                                        <option>United States</option>
+                                        <option>United Kingdom</option>
+                                        <option>Canada</option>
+                                        <option>Australia</option>
+                                        <option>Germany</option>
+                                        <option>France</option>
+                                        <option>Japan</option>
+                                        <option>Brazil</option>
+                                        <option>India</option>
+                                        <option>South Africa</option>
+                                        <option>Nigeria</option>
+                                        <option>Kenya</option>
+                                        <option>Ghana</option>
+                                    </select>
+                                </div>
+
+                                <!-- City Field -->
+                                <div>
+                                    <label class="block text-gray-300 mb-2">City</label>
+                                    <input type="text"
+                                        class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary"
+                                        placeholder="Enter your city">
+                                </div>
+                            </div>
+
+                            <button type="submit"
+                                class="px-12 bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg transition-colors duration-300 flex items-center justify-center">
+                                <i class="fas fa-user-plus mr-2"></i> Join Now!
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right Content -->
+                <div class="flex justify-center animate__animated animate__fadeInRight">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1588265583147-ee69bbb0c45c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fEZpbmQlMjBMb3ZlJTIwJTI2JTIwWW91ciUyMExpZmUlMjBQYXJ0bmVyfGVufDB8fDB8fHww"
+                            alt="Happy couple" class="rounded-2xl shadow-2xl w-full max-w-md">
+                        <div class="absolute -bottom-6 -left-6 bg-primary text-white p-4 rounded-2xl shadow-lg">
+                            <div class="text-3xl font-bold">97%</div>
+                            <div class="text-sm">Successful Matches</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 gradient-bg">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card-dark rounded-2xl p-6 text-center">
+                    <div class="feature-icon bg-primary/20 text-primary mx-auto mb-4">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1001/1001029.png" alt="Verified"
+                            class="w-8 h-8">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">100% Verified</h3>
+                    <p class="text-gray-300">All profiles are thoroughly verified for authenticity and security.</p>
+                </div>
+
+                <div class="card-dark rounded-2xl p-6 text-center">
+                    <div class="feature-icon bg-blue-500/20 text-blue-500 mx-auto mb-4">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1001/1001030.png" alt="Secure" class="w-8 h-8">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Most Secure</h3>
+                    <p class="text-gray-300">Your data and privacy are protected with advanced security measures.</p>
+                </div>
+
+                <div class="card-dark rounded-2xl p-6 text-center">
+                    <div class="feature-icon bg-green-500/20 text-green-500 mx-auto mb-4">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1001/1001031.png" alt="Privacy"
+                            class="w-8 h-8">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">100% Privacy</h3>
+                    <p class="text-gray-300">Your personal information remains confidential and secure.</p>
+                </div>
+
+                <div class="card-dark rounded-2xl p-6 text-center">
+                    <div class="feature-icon bg-purple-500/20 text-purple-500 mx-auto mb-4">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1001/1001032.png" alt="Matching"
+                            class="w-8 h-8">
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Smart Matching</h3>
+                    <p class="text-gray-300">Advanced algorithms help you find compatible partners quickly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Start Flirting Section -->
+    <section class="py-16 bg-dark-light">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">Start Flirting</h2>
+                    <p class="text-gray-300 mb-4">
+                        In our modern day and age dating apps have become an integral part of our lives. They allow you
+                        to check the profile of singles living near you, to chat with them, to meet them and maybe to
+                        fall in love.
+                    </p>
+                    <p class="text-gray-300 mb-8">
+                        If you're searching for a simple dating app with free features allowing to meet singles, you're
+                        in good hands with BBM Connect. With BBM Connect you get all you need from a mobile dating app,
+                        which presents you thousands of users through your smartphone in a very pleasant experience.
+                    </p>
+                    <a href="#"
+                        class="inline-block bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg transition-colors duration-300 font-medium">
+                        Seek Your Partner
+                    </a>
+                </div>
+                <div class="flex justify-center">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1519451241324-20b4ea2c4220?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Flirting illustration" class="rounded-2xl w-full max-w-md">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-16 gradient-bg">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">How Does It Work?</h2>
+                <p class="text-xl text-gray-300">You're just 3 steps away from a great date</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card-dark rounded-2xl p-8 text-center">
+                    <div class="feature-icon bg-primary/20 text-primary mx-auto mb-6 relative">
+                        <i class="fas fa-user-plus text-2xl"></i>
+                        <div
+                            class="absolute -top-2 -right-2 bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">
+                            1</div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Tell us who you are!</h3>
+                    <p class="text-gray-300 mb-6">Create your profile and let us know what you're looking for in a
+                        partner.</p>
+                    <a href="#"
+                        class="inline-block bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg transition-colors duration-300">Join
+                        Now!</a>
+                </div>
+
+                <div class="card-dark rounded-2xl p-8 text-center">
+                    <div class="feature-icon bg-secondary/20 text-secondary mx-auto mb-6 relative">
+                        <i class="fas fa-search text-2xl"></i>
+                        <div
+                            class="absolute -top-2 -right-2 bg-secondary text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">
+                            2</div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Find the right person</h3>
+                    <p class="text-gray-300 mb-6">Use our advanced filters to find matches that meet your criteria.</p>
+                    <a href="#"
+                        class="inline-block bg-secondary hover:bg-amber-600 text-white px-6 py-3 rounded-lg transition-colors duration-300">Join
+                        Now!</a>
+                </div>
+
+                <div class="card-dark rounded-2xl p-8 text-center">
+                    <div class="feature-icon bg-green-500/20 text-green-500 mx-auto mb-6 relative">
+                        <i class="fas fa-heart text-2xl"></i>
+                        <div
+                            class="absolute -top-2 -right-2 bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">
+                            3</div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Start Dating</h3>
+                    <p class="text-gray-300 mb-6">Connect, chat, and arrange to meet your potential life partner.</p>
+                    <a href="#"
+                        class="inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg transition-colors duration-300">Join
+                        Now!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-16 bg-dark-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <div class="stat-number mb-2">455,326,234</div>
+                <p class="text-xl text-gray-300">People joined already!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card-dark rounded-2xl p-6 text-center">
+                    <div class="feature-icon bg-primary/20 text-primary mx-auto mb-4">
+                        <i class="fas fa-ticket-alt text-2xl"></i>
+                    </div>
+                    <div class="stat-number">350M</div>
+                    <p class="text-gray-300">Tickets Booked</p>
+                </div>
+                <div class="card-dark rounded-2xl p-6 text-center">
+                    <div class="feature-icon bg-secondary/20 text-secondary mx-auto mb-4">
+                        <i class="fas fa-calendar-check text-2xl"></i>
+                    </div>
+                    <div class="stat-number">447M</div>
+                    <p class="text-gray-300">Useful Sessions</p>
+                </div>
+                <div class="card-dark rounded-2xl p-6 text-center">
+                    <div class="feature-icon bg-green-500/20 text-green-500 mx-auto mb-4">
+                        <i class="fas fa-user-friends text-2xl"></i>
+                    </div>
+                    <div class="stat-number">60M</div>
+                    <p class="text-gray-300">Talented Speakers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amazing Features Section -->
+    <section class="py-16 gradient-bg">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Amazing Features</h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">To find meaningful connections, dates, and life
+                    partners.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card-dark rounded-2xl p-6 text-center">
+                    <div class="feature-icon bg-primary/20 text-primary mx-auto mb-4">
+                        <i class="fas fa-mobile-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Simple to use</h3>
+                    <p class="text-gray-300">BBM Connect is the most simplest reliable platform to connect with
+                        responsible opposite sex.</p>
+                </div>
+
+                <div class="card-dark rounded-2xl p-6 text-center">
+                    <div class="feature-icon bg-blue-500/20 text-blue-500 mx-auto mb-4">
+                        <i class="fas fa-heart text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Smart Matching</h3>
+                    <p class="text-gray-300">Benefits from our specialized powerful technology that matches people based
+                        on your preferences.</p>
+                </div>
+
+                <div class="card-dark rounded-2xl p-6 text-center">
+                    <div class="feature-icon bg-green-500/20 text-green-500 mx-auto mb-4">
+                        <i class="fas fa-bolt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Filter very fast</h3>
+                    <p class="text-gray-300">Our search filter matches and indicates within 5 seconds based on your
+                        search criteria.</p>
+                </div>
+
+                <div class="card-dark rounded-2xl p-6 text-center">
+                    <div class="feature-icon bg-purple-500/20 text-purple-500 mx-auto mb-4">
+                        <i class="fas fa-users text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Cool community</h3>
+                    <p class="text-gray-300">BBM Connect is a platform where you could find your life partner or connect
+                        with friends.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Members Section -->
+    <section class="py-16 bg-dark-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">Latest Registered Members</h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">If you have been looking for the someone special of
+                    your life for long, then your search ends here</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <div class="member-card card-dark text-center p-4">
+                    <img src="https://plus.unsplash.com/premium_photo-1708271595672-57b4a6a2d3cd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8QSUyMHdvbWFufGVufDB8fDB8fHww"
+                        alt="Dana Miles" class="w-24 h-24 rounded-full mx-auto mb-4">
+                    <h4 class="font-bold">Dana Miles</h4>
+                    <p class="text-gray-400">25 Years Old</p>
+                </div>
+                <div class="member-card card-dark text-center p-4">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+                        alt="John Smith" class="w-24 h-24 rounded-full mx-auto mb-4">
+                    <h4 class="font-bold">John Smith</h4>
+                    <p class="text-gray-400">28 Years Old</p>
+                </div>
+                <div class="member-card card-dark text-center p-4">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+                        alt="Sarah Johnson" class="w-24 h-24 rounded-full mx-auto mb-4">
+                    <h4 class="font-bold">Sarah Johnson</h4>
+                    <p class="text-gray-400">26 Years Old</p>
+                </div>
+                <div class="member-card card-dark text-center p-4">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+                        alt="Mike Wilson" class="w-24 h-24 rounded-full mx-auto mb-4">
+                    <h4 class="font-bold">Mike Wilson</h4>
+                    <p class="text-gray-400">30 Years Old</p>
+                </div>
+                <div class="member-card card-dark text-center p-4">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+                        alt="Emily Davis" class="w-24 h-24 rounded-full mx-auto mb-4">
+                    <h4 class="font-bold">Emily Davis</h4>
+                    <p class="text-gray-400">24 Years Old</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <a href="#"
+                    class="inline-block bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg transition-colors duration-300 font-medium">
+                    Join Now!
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories Section -->
+    <section class="py-16 gradient-bg">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Success Stories</h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">Love in faith - Read inspiring stories from couples
+                    who found love on our platform</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="success-story card-dark">
+                    <img src="https://images.unsplash.com/photo-1556375767-65b200d9d3dc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fFBoaWxvc29waHklMjBvZiUyMGxvdmV8ZW58MHx8MHx8fDA%3D"
+                        alt="Success Story" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <p class="text-gray-400 text-sm mb-2">6 days ago</p>
+                        <h4 class="text-xl font-bold mb-3">Philosophy of love</h4>
+                        <p class="text-gray-300 mb-4">Love for one another and love for yourself is priceless.</p>
+                        <div class="flex justify-between text-sm text-gray-400">
+                            <span><i class="fas fa-globe-americas mr-1"></i> Public</span>
+                            <span><i class="fas fa-users mr-1"></i> 100</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="success-story card-dark">
+                    <img src="https://plus.unsplash.com/premium_photo-1658507042946-e8a0603fcf14?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8TG92ZSUyMGF0JTIwZmlyc3QlMjBzaWdodHxlbnwwfHwwfHx8MA%3D%3D"
+                        alt="Success Story" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <p class="text-gray-400 text-sm mb-2">2 weeks ago</p>
+                        <h4 class="text-xl font-bold mb-3">Love at first sight</h4>
+                        <p class="text-gray-300 mb-4">'Love at first sight' is all about initial attraction and
+                            connection.</p>
+                        <div class="flex justify-between text-sm text-gray-400">
+                            <span><i class="fas fa-globe-americas mr-1"></i> Public</span>
+                            <span><i class="fas fa-users mr-1"></i> 150</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="success-story card-dark">
+                    <img src="https://plus.unsplash.com/premium_photo-1661593208897-c238abd359b5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8V2hhdCUyMHdvbWVuJTIwYWN0dWFsbHklMjB3YW50fGVufDB8fDB8fHww"
+                        alt="Success Story" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <p class="text-gray-400 text-sm mb-2">1 month ago</p>
+                        <h4 class="text-xl font-bold mb-3">What women actually want</h4>
+                        <p class="text-gray-300 mb-4">What women actually want to feel on their special moments.</p>
+                        <div class="flex justify-between text-sm text-gray-400">
+                            <span><i class="fas fa-globe-americas mr-1"></i> Public</span>
+                            <span><i class="fas fa-users mr-1"></i> 200</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-16 bg-dark-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Premium Subscription Plan</h2>
+                <p class="text-xl text-gray-300">Benefit from BBM at its maximum you!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="pricing-card card-dark rounded-2xl p-6 text-center">
+                    <h3 class="text-primary text-xl font-bold mb-2">LITE: 30</h3>
+                    <div class="text-3xl font-bold my-4">₦1,000</div>
+                    <h4 class="text-primary text-xl font-bold mb-6">30 CREDITS</h4>
+                    <button
+                        class="w-full bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-lg transition-colors duration-300">Choose
+                        Plan</button>
+                </div>
+
+                <div class="pricing-card popular card-dark rounded-2xl p-6 text-center relative">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</span>
+                    </div>
+                    <h3 class="text-secondary text-xl font-bold mb-2">GOLD: 100</h3>
+                    <div class="text-3xl font-bold my-4">₦3,000</div>
+                    <h4 class="text-secondary text-xl font-bold mb-6">100 CREDITS</h4>
+                    <button
+                        class="w-full bg-secondary hover:bg-amber-600 text-white py-3 rounded-lg transition-colors duration-300">Choose
+                        Plan</button>
+                </div>
+
+                <div class="pricing-card card-dark rounded-2xl p-6 text-center">
+                    <h3 class="text-blue-500 text-xl font-bold mb-2">PRIME: 175</h3>
+                    <div class="text-3xl font-bold my-4">₦5,000</div>
+                    <h4 class="text-blue-500 text-xl font-bold mb-6">175 CREDITS</h4>
+                    <button
+                        class="w-full bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-lg transition-colors duration-300">Choose
+                        Plan</button>
+                </div>
+
+                <div class="pricing-card card-dark rounded-2xl p-6 text-center">
+                    <h3 class="text-purple-500 text-xl font-bold mb-2">VIP: 300</h3>
+                    <div class="text-3xl font-bold my-4">₦7,000</div>
+                    <h4 class="text-purple-500 text-xl font-bold mb-6">300 CREDITS</h4>
+                    <button
+                        class="w-full bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-lg transition-colors duration-300">Choose
+                        Plan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 cta-bg">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-6">Best Ways to Find Your True Soul Mate</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Connect with amazing people and find meaningful relationships.</p>
+            <a href="#"
+                class="inline-block bg-white text-primary hover:bg-gray-100 font-bold px-8 py-4 rounded-lg transition-colors duration-300">
+                <i class="fas fa-rocket mr-2"></i> Join Now!
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-16 pb-8 bg-dark">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Column 1: Brand & Social -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-heart text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold">BBM Connect</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">Connect with amazing people and find meaningful relationships.</p>
+                    <!-- Social Icons -->
+                    <div class="flex space-x-3">
+                        <a href="#" class="social-icon bg-gray-800 text-gray-400 hover:bg-primary hover:text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 text-gray-400 hover:bg-primary hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 text-gray-400 hover:bg-primary hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon bg-gray-800 text-gray-400 hover:bg-primary hover:text-white">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Documents -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4 text-primary">Documents</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Privacy
+                                Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Terms of
+                                use</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Customer
+                                Support</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Website
+                                rules</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Information -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4 text-primary">Information</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Payments
+                                Rules</a></li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-white transition-colors duration-300">Security</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Blog</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">Help
+                                Center</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Newsletter -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4 text-primary">Subscribe to newsletter</h3>
+                    <p class="text-gray-400 mb-4">Stay updated with our latest news and offers</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Enter your email"
+                            class="flex-1 bg-gray-800 border border-gray-700 rounded-l-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                        <button
+                            class="bg-primary hover:bg-primary-dark text-white px-4 py-3 rounded-r-lg transition-colors duration-300">
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="text-center">
+                    <p class="text-gray-400">© Copyright 2021, All Rights Reserved by Postcraft</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', function () {
+            document.querySelector('.preloader').style.display = 'none';
+        });
+
+        // Scroll to Top
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset > 300) {
+                document.querySelector('.scrollToTop').classList.add('show');
+            } else {
+                document.querySelector('.scrollToTop').classList.remove('show');
+            }
+        });
+
+        document.querySelector('.scrollToTop').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Search Overlay
+        document.querySelector('.serch-icon').addEventListener('click', function () {
+            document.querySelector('.search-overlay').classList.add('active');
+        });
+
+        document.querySelector('.search-overlay .close').addEventListener('click', function () {
+            document.querySelector('.search-overlay').classList.remove('active');
+        });
+
+        // Mobile Menu
+        document.querySelector('.header-bar').addEventListener('click', function () {
+            document.querySelector('.menu').classList.toggle('active');
+            document.querySelector('.overlay').classList.toggle('active');
+        });
+
+        document.querySelector('.overlay').addEventListener('click', function () {
+            document.querySelector('.menu').classList.remove('active');
+            document.querySelector('.overlay').classList.remove('active');
+        });
+
+        // Simple animation on scroll
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add animation classes to elements when they come into view
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements that should animate on scroll
+            document.querySelectorAll('.card-dark, .pricing-card, .feature-icon, .member-card, .success-story').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+
+</html>
