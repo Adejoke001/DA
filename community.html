@@ -4,736 +4,1359 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Community - Lovers'Vow</title>
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/flaticon.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/odometer.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="assets/css/nice-select.css">
-    <link rel="stylesheet" href="assets/css/jquery.animatedheadline.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/dark.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <title>Peyamba - Dating Website HTML Template</title>
+    <!-- Animate.css CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
+    <!-- Custom Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+        :root {
+            --primary: #ff4b91;
+            --primary-dark: #e83e7d;
+            --secondary: #ff9f43;
+            --dark: #1a1a2e;
+            --dark-light: #16213e;
+            --light: #f8f9fa;
+            --accent: #0f3460;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+        }
+
+        .hero-bg {
+            background: linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)),
+                url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .card-dark {
+            background-color: var(--dark-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-blur {
+            backdrop-filter: blur(15px);
+            background-color: rgba(26, 26, 46, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .community-card {
+            transition: all 0.3s ease;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .community-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--primary);
+        }
+
+        .community-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .community-card:hover .community-img {
+            transform: scale(1.05);
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .scrollToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(255, 75, 145, 0.4);
+        }
+
+        .scrollToTop.show {
+            opacity: 1;
+        }
+
+        .header-bar {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .header-bar span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+        }
+
+        .breadcrumb-area {
+            padding: 160px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .breadcrumb-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 75, 145, 0.1) 0%, rgba(255, 159, 67, 0.1) 100%);
+            z-index: -1;
+        }
+
+        .breadcrumb-list {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .breadcrumb-list li {
+            margin-right: 10px;
+        }
+
+        .breadcrumb-list li:not(:last-child):after {
+            content: ">";
+            margin-left: 10px;
+            color: var(--primary);
+        }
+
+        .breadcrumb-list a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-list a:hover {
+            color: var(--primary);
+        }
+
+        .pagination-area a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: var(--dark-light);
+            color: var(--light);
+            margin: 0 5px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .pagination-area a:hover, .pagination-area a.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .filter-modal {
+            background: var(--dark-light);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .filter-option {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .filter-option:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .s-input input[type="radio"] {
+            display: none;
+        }
+
+        .s-input label {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .s-input input[type="radio"]:checked + label {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .select-bar {
+            width: 100%;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--light);
+            outline: none;
+        }
+
+        .select-bar:focus {
+            border-color: var(--primary);
+        }
+
+        .custom-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .custom-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .community-page {
+            display: none;
+        }
+
+        .community-page.active {
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            .header-bar {
+                display: flex;
+            }
+
+            .menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: var(--dark-light);
+                flex-direction: column;
+                padding: 80px 20px 20px;
+                transition: all 0.3s ease;
+                z-index: 998;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .menu.active {
+                right: 0;
+            }
+
+            .menu li {
+                margin: 15px 0;
+            }
+
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                z-index: 997;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .breadcrumb-area {
+                padding: 120px 0 60px;
+            }
+            
+            .hero-bg {
+                background-attachment: scroll;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .breadcrumb-area {
+                padding: 100px 0 40px;
+            }
+            
+            h1 {
+                font-size: 2.5rem !important;
+            }
+            
+            h2 {
+                font-size: 2rem !important;
+            }
+        }
+    </style>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff4b91',
+                        'primary-dark': '#e83e7d',
+                        secondary: '#ff9f43',
+                        dark: '#1a1a2e',
+                        'dark-light': '#16213e',
+                        light: '#f8f9fa',
+                        accent: '#0f3460',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.5s ease-out',
+                        'fade-in-down': 'fadeInDown 0.5s ease-out',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
-<body>
-    <!-- ==========Preloader========== -->
+<body class="font-inter">
+    <!-- Preloader -->
     <div class="preloader">
         <div class="preloader-inner">
             <div class="preloader-icon">
                 <span></span>
                 <span></span>
             </div>
+            <p class="mt-4 text-lg">Loading...</p>
         </div>
     </div>
-    <!-- ==========Preloader========== -->
-    <!-- ==========Overlay========== -->
+
+    <!-- Overlay -->
     <div class="overlay"></div>
+
+    <!-- Scroll to Top -->
     <a href="#" class="scrollToTop">
         <i class="fas fa-angle-up"></i>
     </a>
-    <!-- ==========Overlay========== -->
 
-    <!-- ==========Header-Section========== -->
-<header class="header-section">
-    <div class="container">
-        <div class="header-wrapper">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="assets/images/logo/logo.png" alt="logo">
-                </a>
-            </div>
-            <ul class="menu">
-                <li>
-                    <a href="#">Home</a>
-                    <ul class="submenu">
-                        <li>
-                            <a href="index.html">Home One</a>
-                        </li>
-                        <li>
-                            <a href="index2.html">Home Two</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="community.html" class="active">Community</a>
-                </li>
-                <li>
-                    <a href="membership.html">Membership</a>
-                </li>
-                <li>
-                    <a href="shop2.html">Shop</a>
-                </li>
-                <li>
-                    <a href="#">pages</a>
-                    <ul class="submenu">
-                        <li>
-                            <a href="user-setting.html">User Panel</a>
-                        </li>
-                        <li>
-                            <a href="about.html">About Us</a>
-                        </li>
-                        <li>
-                            <a href="community-single.html">Community Single</a>
-                        </li>
-                        <li>
-                            <a href="members.html">Members</a>
-                        </li>
-                        <li>
-                            <a href="shop3.html">Shop sidebar</a>
-                        </li>
-                        <li>
-                            <a href="single-profile.html">Single Profile One</a>
-                        </li>
-                        <li>
-                            <a href="single-profile2.html">Single Profile Two</a>
-                        </li>
-                        <li>
-                            <a href="single-profile3.html">Single Profile Three</a>
-                        </li>
-                        <li>
-                            <a href="single-shope.html">Shop Details</a>
-                        </li>
-                        <li>
-                            <a href="contact.html">Contact</a>
-                        </li>
-                        <li>
-                            <a href="login.html">Login</a>
-                        </li>
-                        <li>
-                            <a href="register.html">Register</a>
-                        </li>
-                        <li>
-                            <a href="404.html">404</a>
-                        </li>
-                        <li>
-                            <a href="503.html">503</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">blog</a>
-                    <ul class="submenu">
-                        <li>
-                            <a href="blog.html">Blog</a>
-                        </li>
-                        <li>
-                            <a href="blog-details.html">Blog Single</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="separator">
-                    <span>|</span>
-                </li>
-                <li>
-                    <div class="serch-icon">
-                        <i class="fas fa-search"></i>
+    <!-- Navigation -->
+    <nav class="navbar-blur fixed w-full z-50 py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <!-- Navbar Brand -->
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center mr-3 shadow-lg">
+                        <i class="fas fa-heart text-white"></i>
                     </div>
-                </li>
-                <li>
-                    <div class="language-select">
-                        <select class="select-bar">
-                            <option value="">EN</option>
-                            <option value="">IN</option>
-                            <option value="">BN</option>
-                        </select>
-                    </div>
-                </li>
-                <li class="user-profile">
-                    <a href="#">
-                        <img src="assets/images/user-demo.png" alt="">
-                    </a>
-                    <ul class="submenu">
-                        <li>
-                            <a href="#">Profile</a>
-                        </li>
-                        <li>
-                            <a href="#">Logout</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="header-bar d-lg-none">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </div>
-</header>
-    <div class="search-overlay">
-        <div class="close"><i class="fas fa-times"></i></div>
-        <form action="#">
-            <input type="text" placeholder="Write what you want..">
-        </form>
-    </div>
-    <!-- ==========Header-Section========== -->
+                    <span class="text-xl font-bold text-white">Lovers'<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Vow</span></span>
+                </div>
 
-    <!-- ==========Breadcrumb-Section========== -->
-    <section class="breadcrumb-area profile-bc-area">
-        <div class="container">
-            <div class="content">
-                <h2 class="title extra-padding">
-                    Community
-                </h2>
-                <ul class="breadcrumb-list extra-padding">
+                <!-- Desktop Menu-->
+                <ul class="menu hidden lg:flex items-center space-x-8">
                     <li>
-                        <a href="index.html">
+                        <a href="index.html" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium relative group">
                             Home
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300 group-hover:w-full"></span>
                         </a>
                     </li>
-
                     <li>
-                        Community
+                        <a href="about.html" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium relative group">
+                            About
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="community.html" class="text-white font-medium relative group">
+                            Community
+                            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-primary to-secondary"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="membership.html"
+                            class="text-gray-300 hover:text-white transition-colors duration-300 font-medium relative group">
+                            Membership
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300 group-hover:w-full"></span>
+                        </a>
                     </li>
                 </ul>
+
+                <!-- Auth Buttons -->
+                <div class="hidden lg:flex items-center space-x-4">
+                    <a href="login.html" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Log In</a>
+                    <a href="register.html"
+                        class="bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-amber-600 text-white px-6 py-2.5 rounded-lg transition-all duration-300 font-medium shadow-lg hover:shadow-xl">
+                        Sign Up
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="header-bar lg:hidden">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <ul class="menu lg:hidden">
+        <li>
+            <a href="index.html" class="text-white font-medium block py-3 border-b border-gray-700">Home</a>
+        </li>
+        <li>
+            <a href="about.html" class="text-white font-medium block py-3 border-b border-gray-700">About</a>
+        </li>
+        <li>
+            <a href="community.html" class="text-white font-medium block py-3 border-b border-gray-700">Community</a>
+        </li>
+        <li>
+            <a href="membership.html" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium block py-3 border-b border-gray-700">Membership</a>
+        </li>
+        <li class="pt-6 border-t border-gray-700 mt-4">
+            <a href="login.html"
+                class="bg-transparent border border-gray-600 text-white px-4 py-3 rounded-lg hover:bg-gray-800 transition-colors duration-300 font-medium block text-center">
+                Log In
+            </a>
+        </li>
+        <li class="pt-4">
+            <a href="register.html"
+                class="bg-gradient-to-r from-primary to-secondary text-white px-4 py-3 rounded-lg transition-colors duration-300 font-medium block text-center">
+                Sign Up
+            </a>
+        </li>
+    </ul>
+
+    <!-- Hero Section -->
+    <section class="hero-bg">
+        <div class="breadcrumb-area">
+            <div class="container mx-auto px-4">
+                <div class="text-center">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-6 animate__animated animate__fadeInUp">Community</h1>
+                    <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8 animate__animated animate__fadeInUp animate__delay-1s">
+                        Connect with like-minded people and join our vibrant community
+                    </p>
+                    <ul class="breadcrumb-list justify-center animate__animated animate__fadeInUp animate__delay-2s">
+                        <li>
+                            <a href="index.html">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            Community
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
-    <!-- ==========Breadcrumb-Section========== -->
 
-    <!-- ==========Community-Section========== -->
-    <section class="community-section inner-page">
-        <div class="container">
+    <!-- Community Section -->
+    <section class="py-20 gradient-bg">
+        <div class="container mx-auto px-4">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="top-filter">
+                    <div class="top-filter flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
                         <div class="left">
-                            <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
-                                <i class="fas fa-sliders-h"></i>  Filter your search
+                            <a href="#" class="flex items-center text-primary hover:text-primary-dark transition-colors duration-300 font-medium" id="openFilter">
+                                <i class="fas fa-sliders-h mr-2"></i> Filter your search
                             </a>
                         </div>
-                        <div class="right">
-                            <span class="span">
+                        <div class="right flex items-center">
+                            <span class="text-gray-300 mr-3">
                                 Order By : 
                             </span>
                             <div class="filter-right">
-                                <select class="nice-select select-bar">
-                                    <option value="">Latest Active</option>
-                                    <option value="">NEW</option>
-                                    <option value="">OLD</option>
-                                    <option value="">POPULAR</option>
+                                <select class="select-bar" id="orderBy">
+                                    <option value="latest">Latest Active</option>
+                                    <option value="new">NEW</option>
+                                    <option value="old">OLD</option>
+                                    <option value="popular">POPULAR</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-community-box">
-                        <div class="img">
-                            <img src="assets/images/cummunity/img1.jpg" alt="">
+
+            <!-- Page 1 (Active by default) -->
+            <div class="community-page active" id="page1">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Community Card 1 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Philosophy of love" class="community-img">
                         </div>
-                        <div class="content">
-                            <p class="date">
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
                                6 days ago
                             </p>
-                            <a href="community-single.html" class="title">
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
                                 Philosophy of love
                             </a>
-                            <p class="text">
-                                Love for one another and love for 
-                                yourself is priceless.
+                            <p class="text text-gray-300">
+                                Love for one another and love for yourself is priceless.
                             </p>
                         </div>
-                        <div class="box-footer">
-                            <div class="left">
-                                <i class="fas fa-globe-americas"></i> Public
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
                             </div>
-                            <div class="right">
-                                <i class="fas fa-users"></i> 100
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 100
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-community-box">
-                        <div class="img">
-                            <img src="assets/images/cummunity/img2.jpg" alt="">
+
+                    <!-- Community Card 2 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://media.istockphoto.com/id/168267236/photo/key-communication.webp?a=1&b=1&s=612x612&w=0&k=20&c=Ks7KcX_0RFpwg_uhA04nWdRhvtZ7l7lYIMUQoJp-wHI=" alt="Communication Key" class="community-img">
                         </div>
-                        <div class="content">
-                            <p class="date">
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
                                6 days ago
                             </p>
-                            <a href="community-single.html" class="title">
-                                Communication  Key
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
+                                Communication Key
                             </a>
-                            <p class="text">
-                                Love for one another and love for 
-                                yourself is priceless.
+                            <p class="text text-gray-300">
+                                Love for one another and love for yourself is priceless.
                             </p>
                         </div>
-                        <div class="box-footer">
-                            <div class="left">
-                                <i class="fas fa-globe-americas"></i> Public
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
                             </div>
-                            <div class="right">
-                                <i class="fas fa-users"></i> 100
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 100
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-community-box">
-                        <div class="img">
-                            <img src="assets/images/cummunity/img3.jpg" alt="">
+
+                    <!-- Community Card 3 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://plus.unsplash.com/premium_photo-1664476927999-350cbaa284a5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGNvbW11bmljYXRpb24lMjB0aXBzfGVufDB8fDB8fHww" alt="Communication Tips" class="community-img">
                         </div>
-                        <div class="content">
-                            <p class="date">
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
                                6 days ago
                             </p>
-                            <a href="community-single.html" class="title">
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
                                 Communication Tips
                             </a>
-                            <p class="text">
-                                Love for one another and love for 
-                                yourself is priceless.
+                            <p class="text text-gray-300">
+                                Love for one another and love for yourself is priceless.
                             </p>
                         </div>
-                        <div class="box-footer">
-                            <div class="left">
-                                <i class="fas fa-globe-americas"></i> Public
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
                             </div>
-                            <div class="right">
-                                <i class="fas fa-users"></i> 100
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 100
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-community-box">
-                        <div class="img">
-                            <img src="assets/images/cummunity/img4.png" alt="">
+
+                    <!-- Community Card 4 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Easy Way to Dating" class="community-img">
                         </div>
-                        <div class="content">
-                            <p class="date">
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
                                6 days ago
                             </p>
-                            <a href="community-single.html" class="title">
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
                                 Easy Way to Dating
                             </a>
-                            <p class="text">
-                                Love for one another and love for 
-                                yourself is priceless.
+                            <p class="text text-gray-300">
+                                Love for one another and love for yourself is priceless.
                             </p>
                         </div>
-                        <div class="box-footer">
-                            <div class="left">
-                                <i class="fas fa-globe-americas"></i> Public
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
                             </div>
-                            <div class="right">
-                                <i class="fas fa-users"></i> 100
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 100
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-community-box">
-                        <div class="img">
-                            <img src="assets/images/cummunity/img5.png" alt="">
+
+                    <!-- Community Card 5 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Online Dating Tips" class="community-img">
                         </div>
-                        <div class="content">
-                            <p class="date">
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
                                6 days ago
                             </p>
-                            <a href="community-single.html" class="title">
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
                                 Online Dating Tips
                             </a>
-                            <p class="text">
-                                Love for one another and love for 
-                                yourself is priceless.
+                            <p class="text text-gray-300">
+                                Love for one another and love for yourself is priceless.
                             </p>
                         </div>
-                        <div class="box-footer">
-                            <div class="left">
-                                <i class="fas fa-globe-americas"></i> Public
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
                             </div>
-                            <div class="right">
-                                <i class="fas fa-users"></i> 100
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 100
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-community-box">
-                        <div class="img">
-                            <img src="assets/images/cummunity/img6.png" alt="">
+
+                    <!-- Community Card 6 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="An Effective Way" class="community-img">
                         </div>
-                        <div class="content">
-                            <p class="date">
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
                                6 days ago
                             </p>
-                            <a href="community-single.html" class="title">
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
                                 An Effective Way
                             </a>
-                            <p class="text">
-                                Love for one another and love for 
-                                yourself is priceless.
+                            <p class="text text-gray-300">
+                                Love for one another and love for yourself is priceless.
                             </p>
                         </div>
-                        <div class="box-footer">
-                            <div class="left">
-                                <i class="fas fa-globe-americas"></i> Public
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
                             </div>
-                            <div class="right">
-                                <i class="fas fa-users"></i> 100
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 100
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
+
+            <!-- Page 2 -->
+            <div class="community-page" id="page2">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Community Card 7 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1647907213195-308b4413e7bc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cmVsYXRpb25zaGlwJTIwZ29hbHN8ZW58MHx8MHx8fDA%3D" alt="Relationship Goals" class="community-img">
+                        </div>
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
+                               5 days ago
+                            </p>
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
+                                Relationship Goals
+                            </a>
+                            <p class="text text-gray-300">
+                                Setting healthy relationship goals for a lasting connection.
+                            </p>
+                        </div>
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
+                            </div>
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 85
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Community Card 8 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://plus.unsplash.com/premium_photo-1661540508630-10db0dd79c12?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Zmlyc3QlMjBkYXRlJTIwaWRlYXN8ZW58MHx8MHx8fDA%3D" alt="First Date Ideas" class="community-img">
+                        </div>
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
+                               4 days ago
+                            </p>
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
+                                First Date Ideas
+                            </a>
+                            <p class="text text-gray-300">
+                                Creative and memorable first date ideas that break the ice.
+                            </p>
+                        </div>
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
+                            </div>
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 120
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Community Card 9 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Long Distance Love" class="community-img">
+                        </div>
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
+                               3 days ago
+                            </p>
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
+                                Long Distance Love
+                            </a>
+                            <p class="text text-gray-300">
+                                Making long distance relationships work with trust and communication.
+                            </p>
+                        </div>
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
+                            </div>
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 95
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Community Card 10 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1632938530986-505353606c61?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bW9kZXJuJTIwZGF0aW5nfGVufDB8fDB8fHww" alt="Modern Dating" class="community-img">
+                        </div>
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
+                               2 days ago
+                            </p>
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
+                                Modern Dating
+                            </a>
+                            <p class="text text-gray-300">
+                                Navigating the complexities of dating in the digital age.
+                            </p>
+                        </div>
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
+                            </div>
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 150
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Community Card 11 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Building Trust" class="community-img">
+                        </div>
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
+                               1 day ago
+                            </p>
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
+                                Building Trust
+                            </a>
+                            <p class="text text-gray-300">
+                                The foundation of every strong relationship is built on trust.
+                            </p>
+                        </div>
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
+                            </div>
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 110
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Community Card 12 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1559576183-2edf46b41a25?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bG92ZSUyMGxhbmd1YWdlc3xlbnwwfHwwfHx8MA%3D%3D" alt="Love Languages" class="community-img">
+                        </div>
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
+                               Today
+                            </p>
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
+                                Love Languages
+                            </a>
+                            <p class="text text-gray-300">
+                                Understanding and speaking your partner's love language.
+                            </p>
+                        </div>
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
+                            </div>
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 200
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 3 -->
+            <div class="community-page" id="page3">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Community Card 13 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://media.istockphoto.com/id/1065043970/photo/young-woman-sitting-on-edge-looks-out-at-view.webp?a=1&b=1&s=612x612&w=0&k=20&c=RTZGd3eoN2mWlHk1AG5w5mRVUTgB8zONuKu3mHX2d5c=" alt="Healthy Boundaries" class="community-img">
+                        </div>
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
+                               2 hours ago
+                            </p>
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
+                                Healthy Boundaries
+                            </a>
+                            <p class="text text-gray-300">
+                                Setting and respecting boundaries for a healthy relationship.
+                            </p>
+                        </div>
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
+                            </div>
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 75
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Community Card 14 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Conflict Resolution" class="community-img">
+                        </div>
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
+                               1 hour ago
+                            </p>
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
+                                Conflict Resolution
+                            </a>
+                            <p class="text text-gray-300">
+                                Healthy ways to resolve conflicts and strengthen your bond.
+                            </p>
+                        </div>
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
+                            </div>
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 90
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Community Card 15 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://media.istockphoto.com/id/2212396951/photo/handwritten-text-messages-are-they-happy-for-me-replacing-am-i-happy-for-me-self-discovery.webp?a=1&b=1&s=612x612&w=0&k=20&c=Zc307q87np4AR1DpWngeJVcMHodTB5K_DrlB7anYj4M=" alt="Self Love" class="community-img">
+                        </div>
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
+                               30 minutes ago
+                            </p>
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
+                                Self Love Journey
+                            </a>
+                            <p class="text text-gray-300">
+                                Learning to love yourself before loving someone else.
+                            </p>
+                        </div>
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
+                            </div>
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 180
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Community Card 16 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://media.istockphoto.com/id/1407699117/photo/depressed-young-woman-with-relationship-difficulties.webp?a=1&b=1&s=612x612&w=0&k=20&c=7wueYfLwuyjLKreEhJAqO8FJ1da_7uxiJu1sg15ofAc=" alt="Dating After Breakup" class="community-img">
+                        </div>
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
+                               15 minutes ago
+                            </p>
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
+                                Dating After Breakup
+                            </a>
+                            <p class="text text-gray-300">
+                                How to start dating again after a difficult breakup.
+                            </p>
+                        </div>
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
+                            </div>
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 65
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Community Card 17 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://media.istockphoto.com/id/2149503039/photo/cybersecurity-concept-online-data-protection-and-information-security-concept.webp?a=1&b=1&s=612x612&w=0&k=20&c=_mou67exWhQ83iFgEwY4S0oZto1EYcNLESGeFhTNAAE=" alt="Online Safety" class="community-img">
+                        </div>
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
+                               10 minutes ago
+                            </p>
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
+                                Online Safety
+                            </a>
+                            <p class="text text-gray-300">
+                                Staying safe while dating online - important tips to know.
+                            </p>
+                        </div>
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
+                            </div>
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 140
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Community Card 18 -->
+                    <div class="community-card card-dark rounded-2xl overflow-hidden animate__animated animate__fadeInUp">
+                        <div class="img overflow-hidden">
+                            <img src="https://plus.unsplash.com/premium_photo-1661828417300-96ca8c93ac33?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZmluZGluZyUyMGNvbXBhdGliaWxpdHl8ZW58MHx8MHx8fDA%3D" alt="Finding Compatibility" class="community-img">
+                        </div>
+                        <div class="content p-6">
+                            <p class="date text-gray-400 text-sm mb-2">
+                               Just now
+                            </p>
+                            <a href="community-single.html" class="title text-xl font-bold text-white hover:text-primary transition-colors duration-300 block mb-3">
+                                Finding Compatibility
+                            </a>
+                            <p class="text text-gray-300">
+                                Identifying key compatibility factors for lasting relationships.
+                            </p>
+                        </div>
+                        <div class="box-footer flex justify-between items-center p-4 border-t border-gray-700">
+                            <div class="left text-gray-400 text-sm">
+                                <i class="fas fa-globe-americas mr-1"></i> Public
+                            </div>
+                            <div class="right text-gray-400 text-sm">
+                                <i class="fas fa-users mr-1"></i> 95
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="row mt-12">
                 <div class="col-lg-12">
                     <div class="pagination-area text-center">
-                        <a href="#"><i class="fas fa-angle-double-left"></i><span></span></a>
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#" class="active">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#"><i class="fas fa-angle-double-right"></i></a>
+                        <a href="#" class="pagination-prev"><i class="fas fa-angle-double-left"></i></a>
+                        <a href="#" class="pagination-link" data-page="1">1</a>
+                        <a href="#" class="pagination-link" data-page="2">2</a>
+                        <a href="#" class="pagination-link active" data-page="3">3</a>
+                        <a href="#" class="pagination-next"><i class="fas fa-angle-double-right"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- ==========Community-Sectionn========== -->
 
-
-
-
-    <!-- ==========Newslater-Section========== -->
-    <footer class="footer-section">
-        <img class="shape1" src="assets/images/footer/f-shape.png" alt="">
-        <img class="shape2" src="assets/images/footer/flower01.png" alt="">
-        <img class="shape3" src="assets/images/footer/right-shape.png" alt="">
-       <div class="newslater-section">
-           <div class="container">
-               <div class="row justify-content-center">
-                   <div class="col-lg-6 col-md-8">
-                       <div class="newslater-container">
-                           <div class="newslater-wrapper">
-                               <div class="icon">
-                                   <img src="assets/images/footer/n-icon.png" alt="">
-                               </div>
-                               <p class="text">Sign up to recieve a monthly email on the latest news!</p>
-                               <form class="newslater-form">
-                                   <input type="text" placeholder="Your Email Address">
-                                   <button type="submit"> 
-                                       <i class="fab fa-telegram-plane"></i>
-                                   </button>
-                               </form>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
-       <div class="container">
-           <div class="footer-links">
-               <div class="row">
-                   <div class="col-lg-12">
-                       <hr class="hr">
-                   </div>
-               </div>
-               <div class="row">
-                   <div class="col-lg-3 col-sm-6">
-                       <div class="link-wrapper one">
-                           <h4 class="f-l-title">
-                               Our Information
-                           </h4>
-                           <ul class="f-solial-links">
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  About Us
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Contact Us
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Customer Reviews
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Success Stories
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  Business License
-                                   </a>
-                               </li>
-                           </ul>
-                       </div>
-                   </div>
-                   <div class="col-lg-3 col-sm-6">
-                       <div class="link-wrapper two">
-                           <h4 class="f-l-title">
-                               My Account
-                           </h4>
-                           <ul class="f-solial-links">
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Manage Account
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  Safety Tips
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Account Varification
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Safety & Security
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Membership Level
-                                   </a>
-                               </li>
-                           </ul>
-                       </div>
-                   </div>
-                   <div class="col-lg-3 col-sm-6">
-                       <div class="link-wrapper three">
-                           <h4 class="f-l-title">
-                               help center
-                           </h4>
-                           <ul class="f-solial-links">
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  Help centre
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> FAQ
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>Quick Start Guide 
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>Tutorials
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>Associate Blog
-                                   </a>
-                               </li>
-                           </ul>
-                       </div>
-                   </div>
-                   <div class="col-lg-3 col-sm-6">
-                       <div class="link-wrapper four">
-                           <h4 class="f-l-title">
-                               legal 
-                           </h4>
-                           <ul class="f-solial-links">
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  Privacy policy 
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> End User Agreements
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Refund Policy
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Cookie policy
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Report abuse
-                                   </a>
-                               </li>
-                           </ul>
-                       </div>
-                   </div>
-               </div>
-           </div>
-           <div class="copyright-wrapper">
-               <div class="row">
-                   <div class="col-lg-12">
-                       <hr class="hr2">
-                   </div>
-               </div>
-               <div class="row">
-                   <div class="col-lg-6 align-self-center">
-                       <div class="copyr-text">
-                           <span>
-                               Copyright © 2021.All Rights Reserved By
-                           </span>
-                           <a href="#">Peyamba</a>
-                       </div>
-                   </div>
-                   <div class="col-lg-6">
-                       <ul class="footer-social-links">
-                           <li>
-                               <a href="#">
-                                   <i class="fab fa-twitter"></i>
-                               </a>
-                           </li>
-                           <li>
-                               <a href="#">
-                                   <i class="fab fa-facebook-f"></i>
-                               </a>
-                           </li>
-                           <li>
-                               <a href="#">
-                                   <i class="fab fa-instagram"></i>
-                               </a>
-                           </li>
-                           <li>
-                               <a href="#">
-                                   <i class="fab fa-dribbble"></i>
-                               </a>
-                           </li>
-                       </ul>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </footer> 
-    <!-- ==========Newslater-Section========== -->
-
-
-  <!-- Filter Modal -->
-  <div class="modal fade filter-p" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header justify-content-between">
-          <h6 class="modal-title" id="exampleModalCenterTitle">Filter your search</h6>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <div class="join-now-box">
-                <div class="single-option">
-                    <p class="title">
-                        I am a :
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Column 1: Brand & Social -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold">LV</span>
+                        </div>
+                        <span class="text-xl font-bold">Lovers'Vow</span>
+                    </div>
+                    <p class="text-gray-300 mb-6 text-lg">
+                        Connect with amazing people and find meaningful relationships that last a lifetime.
                     </p>
-                    <div class="option">
-                        <div class="s-input mr-3">
-                            <input type="radio" name="gender" id="male"><label for="male">Male</label>
-                        </div>
-                        <div class="s-input">
-                            <input type="radio" name="gender" id="female"><label for="female">Female</label>
-                        </div>
+                    <!-- Social Icons -->
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 hover:bg-pink-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 hover:bg-pink-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 hover:bg-pink-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 hover:bg-pink-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="single-option gender">
-                    <p class="title">
-                        Seeking a :
-                    </p>
-                    <div class="option">
-                        <div class="s-input mr-4">
-                            <input type="radio" name="seeking" id="males"><label for="males">Man</label>
+
+                <!-- Column 2: Documents -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6 text-primary">Documents</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-primary text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-primary text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Terms of use
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-primary text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Customer Support
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-primary text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Website rules
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Information -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6 text-primary">Information</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-primary text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Payments Rules
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-primary text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Security
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-primary text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-primary text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Help Center
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Newsletter -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6 text-primary">Subscribe to newsletter</h3>
+                    <p class="text-gray-300 mb-6">Stay updated with our latest features and success stories</p>
+                    <div class="space-y-4">
+                        <div class="flex flex-col space-y-2">
+                            <label class="text-gray-400 text-sm font-medium">Email</label>
+                            <input type="email" placeholder="Enter your email"
+                                class="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:border-primary transition-colors duration-300">
                         </div>
-                        <div class="s-input">
-                            <input type="radio" name="seeking" id="females"><label for="females">Woman</label>
-                        </div>
+                        <button
+                            class="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-amber-600 text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Subscribe
+                        </button>
                     </div>
                 </div>
-                <div class="single-option age">
-                    <p class="title">
-                       Ages :
-                    </p>
-                    <div class="option">
-                        <div class="s-input mr-3">
-                            <select class="select-bar">
-                                <option value="">18</option>
-                                <option value="">20</option>
-                                <option value="">24</option>
-                            </select>
-                        </div>
-                        <div class="separator">
-                            -
-                        </div>
-                        <div class="s-input ml-3">
-                            <select class="select-bar">
-                                <option value="">30</option>
-                                <option value="">35</option>
-                                <option value="">40</option>
-                            </select>
-                        </div>
+            </div>
+
+            <!-- Copyright - Centered -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="text-center">
+                    <div class="text-gray-400 text-sm">
+                        © Copyright 2023, All Rights Reserved by Lovers'Vow
                     </div>
-                </div>
-                <div class="single-option last">
-                    <p class="title">
-                       Country :
-                    </p>
-                    <div class="option">
-                        <div class="s-input mr-3">
-                            <select class="select-bar">
-                                <option>Select Country</option>
-                                <option value="">India</option>
-                                <option value="">Japan</option>
-                                <option value="">England</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="joun-button">
-                    <button class="custom-button">Join Now!</button>
                 </div>
             </div>
         </div>
-      </div>
-    </div>
-  </div>
+    </footer>
 
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
-    <script src="assets/js/modernizr-3.6.0.min.js"></script>
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/heandline.js"></script>
-    <script src="assets/js/isotope.pkgd.min.js"></script>
-    <script src="assets/js/magnific-popup.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/countdown.min.js"></script>
-    <script src="assets/js/odometer.min.js"></script>
-    <script src="assets/js/viewport.jquery.js"></script>
-    <script src="assets/js/nice-select.js"></script>
-    <script src="assets/js/main.js"></script>
-<script defer="" src="../../beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"6e6444122ed94892b6dff27396bb5627","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+    <!-- Filter Modal -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-0 invisible transition-all duration-300" id="filterModal">
+        <div class="filter-modal w-full max-w-md mx-4">
+            <div class="modal-header flex justify-between items-center p-6 border-b border-gray-700">
+                <h6 class="modal-title text-white font-bold">Filter your search</h6>
+                <button type="button" class="close text-gray-400 hover:text-white text-xl" id="closeFilter">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body p-6">
+                <div class="join-now-box">
+                    <div class="filter-option">
+                        <p class="title text-white font-medium mb-3">
+                            I am a :
+                        </p>
+                        <div class="option flex">
+                            <div class="s-input mr-3">
+                                <input type="radio" name="gender" id="male"><label for="male" class="text-gray-300">Male</label>
+                            </div>
+                            <div class="s-input">
+                                <input type="radio" name="gender" id="female"><label for="female" class="text-gray-300">Female</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-option">
+                        <p class="title text-white font-medium mb-3">
+                            Seeking a :
+                        </p>
+                        <div class="option flex">
+                            <div class="s-input mr-4">
+                                <input type="radio" name="seeking" id="males"><label for="males" class="text-gray-300">Man</label>
+                            </div>
+                            <div class="s-input">
+                                <input type="radio" name="seeking" id="females"><label for="females" class="text-gray-300">Woman</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-option">
+                        <p class="title text-white font-medium mb-3">
+                           Ages :
+                        </p>
+                        <div class="option flex items-center">
+                            <div class="s-input mr-3">
+                                <select class="select-bar">
+                                    <option value="">18</option>
+                                    <option value="">20</option>
+                                    <option value="">24</option>
+                                </select>
+                            </div>
+                            <div class="separator text-gray-400 mx-2">
+                                -
+                            </div>
+                            <div class="s-input ml-3">
+                                <select class="select-bar">
+                                    <option value="">30</option>
+                                    <option value="">35</option>
+                                    <option value="">40</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-option">
+                        <p class="title text-white font-medium mb-3">
+                           Country :
+                        </p>
+                        <div class="option">
+                            <div class="s-input mr-3">
+                                <select class="select-bar">
+                                    <option>Select Country</option>
+                                    <option value="">India</option>
+                                    <option value="">Japan</option>
+                                    <option value="">England</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="joun-button mt-6">
+                        <button class="custom-button">Apply Filters</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Hide preloader
+            setTimeout(function() {
+                $('.preloader').fadeOut(500);
+            }, 1000);
+
+            // Scroll to Top
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 300) {
+                    $('.scrollToTop').addClass('show');
+                } else {
+                    $('.scrollToTop').removeClass('show');
+                }
+            });
+
+            $('.scrollToTop').click(function (e) {
+                e.preventDefault();
+                $('html, body').animate({ scrollTop: 0 }, 300);
+            });
+
+            // Mobile Menu
+            $('.header-bar').click(function () {
+                $('.menu, .overlay').toggleClass('active');
+            });
+
+            $('.overlay').click(function () {
+                $('.menu, .overlay').removeClass('active');
+            });
+
+            // Filter Modal
+            $('#openFilter').click(function(e) {
+                e.preventDefault();
+                $('#filterModal').css({'opacity': '1', 'visibility': 'visible'});
+            });
+
+            $('#closeFilter').click(function() {
+                $('#filterModal').css({'opacity': '0', 'visibility': 'hidden'});
+            });
+
+            // Pagination Functionality
+            $('.pagination-link').click(function(e) {
+                e.preventDefault();
+                const page = $(this).data('page');
+                
+                // Update active state
+                $('.pagination-link').removeClass('active');
+                $(this).addClass('active');
+                
+                // Show the selected page
+                $('.community-page').removeClass('active');
+                $(`#page${page}`).addClass('active');
+                
+                // Scroll to top of community section
+                $('html, body').animate({
+                    scrollTop: $('.community-section').offset().top - 100
+                }, 500);
+            });
+
+            // Previous and Next buttons
+            $('.pagination-prev').click(function(e) {
+                e.preventDefault();
+                const currentPage = parseInt($('.pagination-link.active').data('page'));
+                if (currentPage > 1) {
+                    $(`.pagination-link[data-page="${currentPage - 1}"]`).click();
+                }
+            });
+
+            $('.pagination-next').click(function(e) {
+                e.preventDefault();
+                const currentPage = parseInt($('.pagination-link.active').data('page'));
+                if (currentPage < 5) {
+                    $(`.pagination-link[data-page="${currentPage + 1}"]`).click();
+                }
+            });
+
+            // Add animation classes on scroll
+            function checkScroll() {
+                $('.animate__animated').each(function() {
+                    var elementTop = $(this).offset().top;
+                    var elementBottom = elementTop + $(this).outerHeight();
+                    var viewportTop = $(window).scrollTop();
+                    var viewportBottom = viewportTop + $(window).height();
+                    
+                    if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                        $(this).addClass('animate__fadeInUp');
+                    }
+                });
+            }
+            
+            // Check scroll on page load and scroll
+            checkScroll();
+            $(window).scroll(checkScroll);
+        });
+    </script>
 </body>
 
 </html>

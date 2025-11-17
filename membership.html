@@ -4,681 +4,1172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Membership - Lovers'Vow</title>
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/flaticon.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/odometer.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="assets/css/nice-select.css">
-    <link rel="stylesheet" href="assets/css/jquery.animatedheadline.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/dark.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <title>Peyamba - Dating Website HTML Template</title>
+    <!-- Animate.css CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- Custom Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary: #ff4b91;
+            --primary-dark: #e83e7d;
+            --secondary: #ff9f43;
+            --dark: #1a1a2e;
+            --dark-light: #16213e;
+            --light: #f8f9fa;
+            --accent: #0f3460;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+        }
+
+        .hero-bg {
+            background: linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)),
+                url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .card-dark {
+            background-color: var(--dark-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-blur {
+            backdrop-filter: blur(15px);
+            background-color: rgba(26, 26, 46, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .scrollToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(255, 75, 145, 0.4);
+        }
+
+        .scrollToTop.show {
+            opacity: 1;
+        }
+
+        .header-bar {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .header-bar span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+        }
+
+        .breadcrumb-area {
+            padding: 160px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .breadcrumb-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 75, 145, 0.1) 0%, rgba(255, 159, 67, 0.1) 100%);
+            z-index: -1;
+        }
+
+        .breadcrumb-list {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .breadcrumb-list li {
+            margin-right: 10px;
+        }
+
+        .breadcrumb-list li:not(:last-child):after {
+            content: ">";
+            margin-left: 10px;
+            color: var(--primary);
+        }
+
+        .breadcrumb-list a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-list a:hover {
+            color: var(--primary);
+        }
+
+        .plan-info-box {
+            transition: all 0.4s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-info-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .plan-info-box:hover::before {
+            left: 100%;
+        }
+
+        .plan-info-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Updated Pricing Card Styles */
+        .pricing-card {
+            transition: all 0.3s ease;
+            height: 100%;
+            overflow: visible;
+            /* Changed from hidden to visible */
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border: 2px solid var(--primary);
+            z-index: 10;
+            /* Ensure card stays above others when hovered */
+        }
+
+        .pricing-card.popular {
+            transform: scale(1);
+        }
+
+        .pricing-card.popular:hover {
+            transform: translateY(-5px);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 20;
+            /* Increased z-index to be above the border */
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(255, 75, 145, 0.3);
+        }
 
 
+        .cta-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 8s infinite linear;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            margin: 80px 0;
+        }
+
+        /* FAQ Section */
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .faq-title {
+            background: var(--dark-light);
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-title:hover {
+            background: rgba(255, 75, 145, 0.1);
+        }
+
+        .faq-title h6 {
+            margin: 0;
+            flex: 1;
+        }
+
+        .faq-title .right-icon {
+            width: 20px;
+            height: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .faq-title .right-icon::before,
+        .faq-title .right-icon::after {
+            content: '';
+            position: absolute;
+            background: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .faq-title .right-icon::before {
+            width: 100%;
+            height: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .faq-title .right-icon::after {
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .faq-item.active .faq-title .right-icon::after {
+            transform: translateX(-50%) rotate(90deg);
+            opacity: 0;
+        }
+
+        .faq-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: var(--dark-light);
+        }
+
+        .faq-item.active .faq-content {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        @media (max-width: 1024px) {
+            .header-bar {
+                display: flex;
+            }
+
+            .menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: var(--dark-light);
+                flex-direction: column;
+                padding: 80px 20px 20px;
+                transition: all 0.3s ease;
+                z-index: 998;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .menu.active {
+                right: 0;
+            }
+
+            .menu li {
+                margin: 15px 0;
+            }
+
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                z-index: 997;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .breadcrumb-area {
+                padding: 120px 0 60px;
+            }
+
+            .hero-bg {
+                background-attachment: scroll;
+            }
+
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+
+            .pricing-card.popular:hover {
+                transform: translateY(-5px);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .breadcrumb-area {
+                padding: 100px 0 40px;
+            }
+
+            h1 {
+                font-size: 2.5rem !important;
+            }
+
+            h2 {
+                font-size: 2rem !important;
+            }
+        }
+    </style>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff4b91',
+                        'primary-dark': '#e83e7d',
+                        secondary: '#ff9f43',
+                        dark: '#1a1a2e',
+                        'dark-light': '#16213e',
+                        light: '#f8f9fa',
+                        accent: '#0f3460',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.5s ease-out',
+                        'fade-in-down': 'fadeInDown 0.5s ease-out',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
-<body>
-    <!-- ==========Preloader========== -->
+<body class="font-inter">
+    <!-- Preloader -->
     <div class="preloader">
         <div class="preloader-inner">
             <div class="preloader-icon">
                 <span></span>
                 <span></span>
             </div>
+            <p class="mt-4 text-lg">Loading...</p>
         </div>
     </div>
-    <!-- ==========Preloader========== -->
-    <!-- ==========Overlay========== -->
+
+    <!-- Overlay -->
     <div class="overlay"></div>
+
+    <!-- Scroll to Top -->
     <a href="#" class="scrollToTop">
         <i class="fas fa-angle-up"></i>
     </a>
-    <!-- ==========Overlay========== -->
 
-    <!-- ==========Header-Section========== -->
-    <header class="header-section">
-        <div class="container">
-            <div class="header-wrapper">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="assets/images/logo/logo.png" alt="logo">
+    <!-- Navigation -->
+    <nav class="navbar-blur fixed w-full z-50 py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <!-- Navbar Brand -->
+                <div class="flex items-center">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center mr-3 shadow-lg">
+                        <i class="fas fa-heart text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold text-white">Lovers'<span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Vow</span></span>
+                </div>
+
+                <!-- Desktop Menu-->
+                <ul class="menu hidden lg:flex items-center space-x-8">
+                    <li>
+                        <a href="index.html"
+                            class="text-gray-300 hover:text-white transition-colors duration-300 font-medium relative group">
+                            Home
+                            <span
+                                class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="about.html"
+                            class="text-gray-300 hover:text-white transition-colors duration-300 font-medium relative group">
+                            About
+                            <span
+                                class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="community.html"
+                            class="text-gray-300 hover:text-white transition-colors duration-300 font-medium relative group">
+                            Community
+                            <span
+                                class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="membership.html" class="text-white font-medium relative group">
+                            Membership
+                            <span
+                                class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-primary to-secondary"></span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Auth Buttons -->
+                <div class="hidden lg:flex items-center space-x-4">
+                    <a href="login.html"
+                        class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Log In</a>
+                    <a href="register.html"
+                        class="bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-amber-600 text-white px-6 py-2.5 rounded-lg transition-all duration-300 font-medium shadow-lg hover:shadow-xl">
+                        Sign Up
                     </a>
                 </div>
-                <ul class="menu">
-                    <li>
-                        <a href="#">Home</a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="index.html" class="active">Home One</a>
-                            </li>
-                            <li>
-                                <a href="index2.html">Home Two</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="community.html">Community</a>
-                    </li>
-                    <li>
-                        <a href="membership.html" class="active">Membership</a>
-                    </li>
-                    <li>
-                        <a href="shop2.html">Shop</a>
-                    </li>
-                    <li>
-                        <a href="#">pages</a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="user-setting.html">User Panel</a>
-                            </li>
-                            <li>
-                                <a href="about.html">About Us</a>
-                            </li>
-                            <li>
-                                <a href="community-single.html">Community Single</a>
-                            </li>
-                            <li>
-                                <a href="members.html">Members</a>
-                            </li>
-                            <li>
-                                <a href="shop3.html">Shop sidebar</a>
-                            </li>
-                            <li>
-                                <a href="single-profile.html">Single Profile One</a>
-                            </li>
-                            <li>
-                                <a href="single-profile2.html">Single Profile Two</a>
-                            </li>
-                            <li>
-                                <a href="single-profile3.html">Single Profile Three</a>
-                            </li>
-                            <li>
-                                <a href="single-shope.html">Shop Details</a>
-                            </li>
-                            <li>
-                                <a href="contact.html">Contact</a>
-                            </li>
-                            <li>
-                                <a href="login.html">Login</a>
-                            </li>
-                            <li>
-                                <a href="register.html">Register</a>
-                            </li>
-                            <li>
-                                <a href="404.html">404</a>
-                            </li>
-                            <li>
-                                <a href="503.html">503</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">blog</a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="blog.html">Blog</a>
-                            </li>
-                            <li>
-                                <a href="blog-details.html">Blog Single</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="separator">
-                        <span>|</span>
-                    </li>
-                    <li>
-                        <div class="serch-icon">
-                            <i class="fas fa-search"></i>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="language-select">
-                            <select class="select-bar">
-                                <option value="">EN</option>
-                                <option value="">IN</option>
-                                <option value="">BN</option>
-                            </select>
-                        </div>
-                    </li>
-                    <li class="user-profile">
-                        <a href="#">
-                            <img src="assets/images/user-demo.png" alt="">
-                        </a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="#">Profile</a>
-                            </li>
-                            <li>
-                                <a href="#">Logout</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <div class="header-bar d-lg-none">
+
+                <!-- Mobile Menu Button -->
+                <div class="header-bar lg:hidden">
                     <span></span>
                     <span></span>
                     <span></span>
                 </div>
             </div>
         </div>
-    </header>
-    <div class="search-overlay">
-        <div class="close"><i class="fas fa-times"></i></div>
-        <form action="#">
-            <input type="text" placeholder="Write what you want..">
-        </form>
-    </div>
-    <!-- ==========Header-Section========== -->
+    </nav>
 
-    <!-- ==========Breadcrumb-Section========== -->
-    <section class="breadcrumb-area profile-bc-area">
-        <div class="container">
-            <div class="content">
-                <h2 class="title extra-padding">
-                    Membership
+    <!-- Mobile Menu -->
+    <ul class="menu lg:hidden">
+        <li>
+            <a href="index.html" class="text-white font-medium block py-3 border-b border-gray-700">Home</a>
+        </li>
+        <li>
+            <a href="about.html" class="text-white font-medium block py-3 border-b border-gray-700">About</a>
+        </li>
+        <li>
+            <a href="community.html"
+                class="text-gray-300 hover:text-white transition-colors duration-300 font-medium block py-3 border-b border-gray-700">Community</a>
+        </li>
+        <li>
+            <a href="membership.html" class="text-white font-medium block py-3 border-b border-gray-700">Membership</a>
+        </li>
+        <li class="pt-6 border-t border-gray-700 mt-4">
+            <a href="login.html"
+                class="bg-transparent border border-gray-600 text-white px-4 py-3 rounded-lg hover:bg-gray-800 transition-colors duration-300 font-medium block text-center">
+                Log In
+            </a>
+        </li>
+        <li class="pt-4">
+            <a href="register.html"
+                class="bg-gradient-to-r from-primary to-secondary text-white px-4 py-3 rounded-lg transition-colors duration-300 font-medium block text-center">
+                Sign Up
+            </a>
+        </li>
+    </ul>
+
+    <!-- Hero Section -->
+    <section class="hero-bg">
+        <div class="breadcrumb-area">
+            <div class="container mx-auto px-4">
+                <div class="text-center">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-6 animate__animated animate__fadeInUp">Membership</h1>
+                    <p
+                        class="text-xl text-gray-300 max-w-2xl mx-auto mb-8 animate__animated animate__fadeInUp animate__delay-1s">
+                        Unlock premium features and find your perfect match faster
+                    </p>
+                    <ul class="breadcrumb-list justify-center animate__animated animate__fadeInUp animate__delay-2s">
+                        <li>
+                            <a href="index.html">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            Membership
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership Intro Section -->
+    <section class="py-20 gradient-bg">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h6 class="text-primary font-semibold text-lg mb-2 animate__animated animate__fadeInUp">
+                    Upgrade Your Profile
+                </h6>
+                <h2 class="text-4xl font-bold mb-4 animate__animated animate__fadeInUp">
+                    Premium Membership Plans
                 </h2>
-                <ul class="breadcrumb-list extra-padding">
-                    <li>
-                        <a href="index.html">
-                            Home
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto animate__animated animate__fadeInUp">
+                    Benefit from Lovers'Vow at its maximum capacity by choosing the plan that suits you!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="plan-info-box card-dark rounded-2xl p-8 text-center animate__animated animate__fadeInUp"
+                    data-wow-delay="0.1s">
+                    <div class="feature-icon bg-primary/20 text-primary mx-auto mb-6">
+                        <i class="fas fa-comments text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Unlimited Messages</h3>
+                    <p class="text-gray-300">Send and receive messages with no limits and connect freely with your
+                        matches.</p>
+                </div>
+
+                <div class="plan-info-box card-dark rounded-2xl p-8 text-center animate__animated animate__fadeInUp"
+                    data-wow-delay="0.2s">
+                    <div class="feature-icon bg-secondary/20 text-secondary mx-auto mb-6">
+                        <i class="fas fa-crown text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">VIP Badge</h3>
+                    <p class="text-gray-300">Stand out with an exclusive VIP badge that increases your visibility and
+                        credibility.</p>
+                </div>
+
+                <div class="plan-info-box card-dark rounded-2xl p-8 text-center animate__animated animate__fadeInUp"
+                    data-wow-delay="0.3s">
+                    <div class="feature-icon bg-blue-500/20 text-blue-500 mx-auto mb-6">
+                        <i class="fas fa-heart text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Unlimited Matches</h3>
+                    <p class="text-gray-300">Get unlimited daily matches and increase your chances of finding the
+                        perfect partner.</p>
+                </div>
+
+                <div class="plan-info-box card-dark rounded-2xl p-8 text-center animate__animated animate__fadeInUp"
+                    data-wow-delay="0.4s">
+                    <div class="feature-icon bg-purple-500/20 text-purple-500 mx-auto mb-6">
+                        <i class="fas fa-eye text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Profile Boosts</h3>
+                    <p class="text-gray-300">Get your profile seen by more people with regular boosts that increase your
+                        visibility.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- Pricing Plans Section -->
+    <section class="py-20 bg-dark-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 animate__animated animate__fadeInUp">
+                    Choose Your Perfect Plan
+                </h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto animate__animated animate__fadeInUp">
+                    Select the membership plan that fits your needs and budget
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Plan 1 -->
+                <div class="pricing-card card-dark rounded-2xl p-6 text-center relative animate__animated animate__fadeInUp"
+                    data-wow-delay="0.1s">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold mb-2">Basic</h3>
+                        <p class="text-gray-400 mb-4">Perfect for getting started</p>
+                        <div class="text-4xl font-bold text-primary mb-2">$4.99</div>
+                        <p class="text-gray-400">per month</p>
+                    </div>
+                    <ul class="space-y-3 mb-6 text-left">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">100 messages per month</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">5 daily matches</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">Basic profile visibility</span>
+                        </li>
+                        <li class="flex items-center text-gray-500">
+                            <i class="fas fa-times mr-3"></i>
+                            <span class="text-sm">No VIP badge</span>
+                        </li>
+                    </ul>
+                    <a href="#"
+                        class="block w-full bg-primary hover:bg-primary-dark text-white py-3 rounded-lg font-semibold transition-colors duration-300">
+                        Get Started
+                    </a>
+                </div>
+
+                <!-- Plan 2 -->
+                <div class="pricing-card card-dark rounded-2xl p-6 text-center relative animate__animated animate__fadeInUp"
+                    data-wow-delay="0.2s">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold mb-2">Premium</h3>
+                        <p class="text-gray-400 mb-4">Our most popular choice</p>
+                        <div class="text-4xl font-bold text-primary mb-2">$9.99</div>
+                        <p class="text-gray-400">per month</p>
+                    </div>
+                    <ul class="space-y-3 mb-6 text-left">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">Unlimited messages</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">20 daily matches</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">Enhanced profile visibility</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">VIP badge included</span>
+                        </li>
+                    </ul>
+                    <a href="#"
+                        class="block w-full bg-primary hover:bg-primary-dark text-white py-3 rounded-lg font-semibold transition-colors duration-300">
+                        Get Started
+                    </a>
+                </div>
+
+                <!-- Plan 3 (Popular) -->
+                <div class="pricing-card card-dark rounded-2xl p-6 text-center relative popular animate__animated animate__fadeInUp"
+                    data-wow-delay="0.3s">
+                    <div class="popular-badge">MOST POPULAR</div>
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold mb-2">Gold</h3>
+                        <p class="text-gray-400 mb-4">For serious daters</p>
+                        <div class="text-4xl font-bold text-primary mb-2">$19.99</div>
+                        <p class="text-gray-400">per month</p>
+                    </div>
+                    <ul class="space-y-3 mb-6 text-left">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">Unlimited messages</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">Unlimited daily matches</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">Priority profile visibility</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">Exclusive Gold badge</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">Weekly profile boosts</span>
+                        </li>
+                    </ul>
+                    <a href="#"
+                        class="block w-full bg-primary hover:bg-primary-dark text-white py-3 rounded-lg font-semibold transition-colors duration-300">
+                        Get Started
+                    </a>
+                </div>
+
+                <!-- Plan 4 -->
+                <div class="pricing-card card-dark rounded-2xl p-6 text-center relative animate__animated animate__fadeInUp"
+                    data-wow-delay="0.4s">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold mb-2">Platinum</h3>
+                        <p class="text-gray-400 mb-4">Ultimate experience</p>
+                        <div class="text-4xl font-bold text-primary mb-2">$29.99</div>
+                        <p class="text-gray-400">per month</p>
+                    </div>
+                    <ul class="space-y-3 mb-6 text-left">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">Unlimited messages</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">Unlimited daily matches</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">Maximum profile visibility</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">Exclusive Platinum badge</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">Daily profile boosts</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-3"></i>
+                            <span class="text-sm">Priority customer support</span>
+                        </li>
+                    </ul>
+                    <a href="#"
+                        class="block w-full bg-primary hover:bg-primary-dark text-white py-3 rounded-lg font-semibold transition-colors duration-300">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <p class="text-gray-300">
+                    If you have any questions <a href="contact.html"
+                        class="text-primary hover:text-primary-dark font-semibold">Contact Us</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- FAQ Section -->
+    <section class="py-20 gradient-bg">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h6 class="text-primary font-semibold text-lg mb-2 animate__animated animate__fadeInUp">
+                    Got any Questions?
+                </h6>
+                <h2 class="text-4xl font-bold mb-4 animate__animated animate__fadeInUp">
+                    We've Got Answers
+                </h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto animate__animated animate__fadeInUp">
+                    Try to check out frequently asked questions
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item animate__animated animate__fadeInUp">
+                    <div class="faq-title">
+                        <h6 class="title">What is Lovers'Vow?</h6>
+                        <span class="right-icon"></span>
+                    </div>
+                    <div class="faq-content">
+                        <p>Lovers'Vow is a premium dating platform designed to help singles find meaningful connections
+                            and lasting relationships. We use advanced matching algorithms and provide a safe, verified
+                            environment for our members to connect.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item active animate__animated animate__fadeInUp">
+                    <div class="faq-title">
+                        <h6 class="title">What kind of photos can I use?</h6>
+                        <span class="right-icon"></span>
+                    </div>
+                    <div class="faq-content">
+                        <p>We encourage members to use clear, recent photos that represent themselves authentically.
+                            Photos should be appropriate and follow our community guidelines. We verify all profile
+                            photos to ensure authenticity and maintain a safe environment for all members.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="faq-item animate__animated animate__fadeInUp">
+                    <div class="faq-title">
+                        <h6 class="title">Which payment methods do you accept?</h6>
+                        <span class="right-icon"></span>
+                    </div>
+                    <div class="faq-content">
+                        <p>We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and various
+                            regional payment methods depending on your location. All payments are processed securely
+                            through encrypted channels to protect your financial information.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="faq-item animate__animated animate__fadeInUp">
+                    <div class="faq-title">
+                        <h6 class="title">How does your matchmaking work?</h6>
+                        <span class="right-icon"></span>
+                    </div>
+                    <div class="faq-content">
+                        <p>Our matchmaking algorithm considers multiple factors including your profile information,
+                            preferences, interests, and behavior on the platform. We use machine learning to
+                            continuously improve our matching accuracy and suggest compatible partners based on shared
+                            values and compatibility indicators.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="faq-item animate__animated animate__fadeInUp">
+                    <div class="faq-title">
+                        <h6 class="title">How can I delete my profile?</h6>
+                        <span class="right-icon"></span>
+                    </div>
+                    <div class="faq-content">
+                        <p>You can delete your profile at any time by going to your account settings and selecting
+                            "Delete Account". Please note that this action is permanent and cannot be undone. All your
+                            data will be permanently removed from our systems in accordance with our privacy policy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 cta-bg relative overflow-hidden">
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h2 class="text-4xl font-bold mb-6 animate__animated animate__fadeInUp">Ready to Find Your Perfect Match?
+            </h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto animate__animated animate__fadeInUp">
+                Join thousands of singles who have found love through Lovers'Vow
+            </p>
+            <a href="#"
+                class="inline-block bg-white text-primary hover:bg-gray-100 font-bold px-8 py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl animate__animated animate__fadeInUp animate__delay-1s">
+                <i class="fas fa-rocket mr-2"></i> Start Your Journey Today
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Column 1: Brand & Social -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div
+                            class="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold">LV</span>
+                        </div>
+                        <span class="text-xl font-bold">Lovers'Vow</span>
+                    </div>
+                    <p class="text-gray-300 mb-6 text-lg">
+                        Connect with amazing people and find meaningful relationships that last a lifetime.
+                    </p>
+                    <!-- Social Icons -->
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 hover:bg-pink-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110">
+                            <i class="fab fa-facebook-f"></i>
                         </a>
-                    </li>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 hover:bg-pink-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 hover:bg-pink-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 hover:bg-pink-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
 
-                    <li>
-                        Membership
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    <!-- ==========Breadcrumb-Section========== -->
+                <!-- Column 2: Documents -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6 text-primary">Documents</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-primary text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-primary text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Terms of use
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-primary text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Customer Support
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-primary text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Website rules
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-     <!-- ==========Membership-Section========== -->
-     <section class="membership-section">
-         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="content">
-                        <div class="section-header">
-                            <h6 class="sub-title extra-padding">
-                                Upgrade Your Profile
-                            </h6>
-                            <h2 class="title">
-                                Premium Memeber Plan
-                            </h2>
-                            <p class="text">
-                                Benefit from Peyamba at its maximum you!
-                            </p>
-                        </div>
-                    </div>
+                <!-- Column 3: Information -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6 text-primary">Information</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-primary text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Payments Rules
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-primary text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Security
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-primary text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-primary text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Help Center
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-             <div class="row m-s-top">
-                <div class="col-lg-3 col-md-6">
-                    <div class="plan-info">
-                        <div class="icon">
-                            <img src="assets/images/membership/icon1.png" alt="">
-                        </div>
-                        <h4 class="title">
-                            Unlimited Messages 
-                        </h4>
-                        <p class="text">
-                            Send and receive messages
-                            with no limits 
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="plan-info">
-                        <div class="icon">
-                            <img src="assets/images/membership/icon2.png" alt="">
-                        </div>
-                        <h4 class="title">
-                            VIP Badge
-                        </h4>
-                        <p class="text">
-                            Send and receive messages
-                            with no limits 
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="plan-info">
-                        <div class="icon">
-                            <img src="assets/images/membership/icon3.png" alt="">
-                        </div>
-                        <h4 class="title">
-                            Unlimited matches 
-                        </h4>
-                        <p class="text">
-                            Send and receive messages
-                            with no limits 
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="plan-info">
-                        <div class="icon">
-                            <img src="assets/images/membership/icon4.png" alt="">
-                        </div>
-                        <h4 class="title">
-                            Take more messages  
-                        </h4>
-                        <p class="text">
-                            Send and receive messages
-                            with no limits 
-                        </p>
-                    </div>
-                </div>
-             </div>
-             <div class="row">
-                 <div class="col-lg-12">
-                    <div class="pricing-plan-wrapper">
-                        <img class="left-img" src="assets/images/membership/left-img.png" alt="">
-                        <img class="right-img" src="assets/images/membership/right-img.png" alt="">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-6">
-                               <div class="single-plan">
-                                   <p class="duration">
-                                       1 Month
-                                   </p>
-                                   <h4 class="number">
-                                       <sup>$</sup>4.99
-                                   </h4>
-                                   <p class="stamet">
-                                       Per Month
-                                   </p>
-                                   <a href="#" class="custom-button">Buy Now!</a>
-                                   <img class="shape" src="assets/images/membership/plan-bg.png" alt="">
-                               </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                               <div class="single-plan">
-                                   <p class="duration">
-                                       1 Month
-                                   </p>
-                                   <h4 class="number">
-                                       <sup>$</sup>3.99
-                                   </h4>
-                                   <p class="stamet">
-                                       Per Month
-                                   </p>
-                                   <a href="#" class="custom-button">Buy Now!</a>
-                                   <img class="shape" src="assets/images/membership/plan-bg.png" alt="">
-                               </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                               <div class="single-plan">
-                                   <p class="duration">
-                                       1 Month
-                                   </p>
-                                   <h4 class="number">
-                                       <sup>$</sup>2.99
-                                   </h4>
-                                   <p class="stamet">
-                                       Per Month
-                                   </p>
-                                   <a href="#" class="custom-button">Buy Now!</a>
-                                   <img class="shape" src="assets/images/membership/plan-bg.png" alt="">
-                               </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                               <div class="single-plan">
-                                   <p class="duration">
-                                       1 Month
-                                   </p>
-                                   <h4 class="number">
-                                       <sup>$</sup>1.99
-                                   </h4>
-                                   <p class="stamet">
-                                       Per Month
-                                   </p>
-                                   <a href="#" class="custom-button">Buy Now!</a>
-                                   <img class="shape" src="assets/images/membership/plan-bg.png" alt="">
-                               </div>
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-             </div>
-         </div>
-         <div class="pricing-plans">
-            <img class="shape1" src="assets/images/join/heartshape.png" alt="">
-             <div class="container">
-                 <div class="row">
-                     <div class="col-lg-12">
-                         <p class="contact-link">
-                            If you have any questions <a href="#">Contact Us</a>
-                         </p>
-                     </div>
-                 </div>
-             </div>
-         </div>
-     </section>
-     <!-- ==========Membership-Section========== -->
 
-    <!-- ==========Faq-Section========== -->
-    <section class="faq-section">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="content">
-                        <div class="section-header">
-                            <h6 class="sub-title extra-padding">
-                                Got any Question
-                            </h6>
-                            <h2 class="title">
-                                We’ve Got Answers
-                            </h2>
-                            <p class="text">
-                                Try to check out frequently ask questions
-                            </p>
+                <!-- Column 4: Newsletter -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6 text-primary">Subscribe to newsletter</h3>
+                    <p class="text-gray-300 mb-6">Stay updated with our latest features and success stories</p>
+                    <div class="space-y-4">
+                        <div class="flex flex-col space-y-2">
+                            <label class="text-gray-400 text-sm font-medium">Email</label>
+                            <input type="email" placeholder="Enter your email"
+                                class="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:border-primary transition-colors duration-300">
                         </div>
+                        <button
+                            class="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-amber-600 text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Subscribe
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="faq-area">
-                <div class="faq-wrapper">
-                    <div class="faq-item">
-                        <div class="faq-title">
-                            <h6 class="title">What is Peyamba? </h6>
-                            <span class="right-icon"></span>
-                        </div>
-                        <div class="faq-content">
-                            <p>Being that Tickto does not own any of the tickets sold on our site, we do not have the ability to exchange or replace tickets with other inventory. </p>
-                            <p>If you would like to "upgrade" or change the location of your seats, you can relist your current tickets for sale here and purchase other tickets of your choice. </p>
-                        </div>
-                    </div>
-                    <div class="faq-item active open">
-                        <div class="faq-title">
-                            <h6 class="title">What kind of photos can I use? </h6>
-                            <span class="right-icon"></span>
-                        </div>
-                        <div class="faq-content">
-                            <p>Being that Tickto does not own any of the tickets sold on our site, we do not have the ability to exchange or replace tickets with other inventory. </p>
-                            <p>If you would like to "upgrade" or change the location of your seats, you can relist your current tickets for sale here and purchase other tickets of your choice. </p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-title">
-                            <h6 class="title">Which are the payment methods?</h6>
-                            <span class="right-icon"></span>
-                        </div>
-                        <div class="faq-content">
-                            <p>Being that Tickto does not own any of the tickets sold on our site, we do not have the ability to exchange or replace tickets with other inventory. </p>
-                            <p>If you would like to "upgrade" or change the location of your seats, you can relist your current tickets for sale here and purchase other tickets of your choice. </p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-title">
-                            <h6 class="title">How Our Matchmaking Works ?</h6>
-                            <span class="right-icon"></span>
-                        </div>
-                        <div class="faq-content">
-                            <p>Being that Tickto does not own any of the tickets sold on our site, we do not have the ability to exchange or replace tickets with other inventory. </p>
-                            <p>If you would like to "upgrade" or change the location of your seats, you can relist your current tickets for sale here and purchase other tickets of your choice. </p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-title">
-                            <h6 class="title">How can i delete my profile?</h6>
-                            <span class="right-icon"></span>
-                        </div>
-                        <div class="faq-content">
-                            <p>Being that Tickto does not own any of the tickets sold on our site, we do not have the ability to exchange or replace tickets with other inventory. </p>
-                            <p>If you would like to "upgrade" or change the location of your seats, you can relist your current tickets for sale here and purchase other tickets of your choice. </p>
-                        </div>
+
+            <!-- Copyright - Centered -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="text-center">
+                    <div class="text-gray-400 text-sm">
+                        © Copyright 2023, All Rights Reserved by Lovers'Vow
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- ==========Faq-Section========== -->
+    </footer>
 
-    <!-- ==========Newslater-Section========== -->
-    <footer class="footer-section">
-        <img class="shape1" src="assets/images/footer/f-shape.png" alt="">
-        <img class="shape2" src="assets/images/footer/flower01.png" alt="">
-        <img class="shape3" src="assets/images/footer/right-shape.png" alt="">
-       <div class="newslater-section">
-           <div class="container">
-               <div class="row justify-content-center">
-                   <div class="col-lg-6 col-md-8">
-                       <div class="newslater-container">
-                           <div class="newslater-wrapper">
-                               <div class="icon">
-                                   <img src="assets/images/footer/n-icon.png" alt="">
-                               </div>
-                               <p class="text">Sign up to recieve a monthly email on the latest news!</p>
-                               <form class="newslater-form">
-                                   <input type="text" placeholder="Your Email Address">
-                                   <button type="submit"> 
-                                       <i class="fab fa-telegram-plane"></i>
-                                   </button>
-                               </form>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
-       <div class="container">
-           <div class="footer-links">
-               <div class="row">
-                   <div class="col-lg-12">
-                       <hr class="hr">
-                   </div>
-               </div>
-               <div class="row">
-                   <div class="col-lg-3 col-sm-6">
-                       <div class="link-wrapper one">
-                           <h4 class="f-l-title">
-                               Our Information
-                           </h4>
-                           <ul class="f-solial-links">
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  About Us
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Contact Us
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Customer Reviews
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Success Stories
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  Business License
-                                   </a>
-                               </li>
-                           </ul>
-                       </div>
-                   </div>
-                   <div class="col-lg-3 col-sm-6">
-                       <div class="link-wrapper two">
-                           <h4 class="f-l-title">
-                               My Account
-                           </h4>
-                           <ul class="f-solial-links">
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Manage Account
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  Safety Tips
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Account Varification
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Safety & Security
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Membership Level
-                                   </a>
-                               </li>
-                           </ul>
-                       </div>
-                   </div>
-                   <div class="col-lg-3 col-sm-6">
-                       <div class="link-wrapper three">
-                           <h4 class="f-l-title">
-                               help center
-                           </h4>
-                           <ul class="f-solial-links">
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  Help centre
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> FAQ
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>Quick Start Guide 
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>Tutorials
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>Associate Blog
-                                   </a>
-                               </li>
-                           </ul>
-                       </div>
-                   </div>
-                   <div class="col-lg-3 col-sm-6">
-                       <div class="link-wrapper four">
-                           <h4 class="f-l-title">
-                               legal 
-                           </h4>
-                           <ul class="f-solial-links">
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  Privacy policy 
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> End User Agreements
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Refund Policy
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Cookie policy
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Report abuse
-                                   </a>
-                               </li>
-                           </ul>
-                       </div>
-                   </div>
-               </div>
-           </div>
-           <div class="copyright-wrapper">
-               <div class="row">
-                   <div class="col-lg-12">
-                       <hr class="hr2">
-                   </div>
-               </div>
-               <div class="row">
-                   <div class="col-lg-6 align-self-center">
-                       <div class="copyr-text">
-                           <span>
-                               Copyright © 2021.All Rights Reserved By
-                           </span>
-                           <a href="#">Peyamba</a>
-                       </div>
-                   </div>
-                   <div class="col-lg-6">
-                       <ul class="footer-social-links">
-                           <li>
-                               <a href="#">
-                                   <i class="fab fa-twitter"></i>
-                               </a>
-                           </li>
-                           <li>
-                               <a href="#">
-                                   <i class="fab fa-facebook-f"></i>
-                               </a>
-                           </li>
-                           <li>
-                               <a href="#">
-                                   <i class="fab fa-instagram"></i>
-                               </a>
-                           </li>
-                           <li>
-                               <a href="#">
-                                   <i class="fab fa-dribbble"></i>
-                               </a>
-                           </li>
-                       </ul>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </footer> 
-    <!-- ==========Newslater-Section========== -->
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+    <script>
+        $(document).ready(function () {
+            // Hide preloader
+            setTimeout(function () {
+                $('.preloader').fadeOut(500);
+            }, 1000);
 
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
-    <script src="assets/js/modernizr-3.6.0.min.js"></script>
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/heandline.js"></script>
-    <script src="assets/js/isotope.pkgd.min.js"></script>
-    <script src="assets/js/magnific-popup.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/countdown.min.js"></script>
-    <script src="assets/js/odometer.min.js"></script>
-    <script src="assets/js/viewport.jquery.js"></script>
-    <script src="assets/js/nice-select.js"></script>
-    <script src="assets/js/main.js"></script>
-<script defer="" src="../../beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"6e6444122ed94892b6dff27396bb5627","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+            // Scroll to Top
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 300) {
+                    $('.scrollToTop').addClass('show');
+                } else {
+                    $('.scrollToTop').removeClass('show');
+                }
+            });
+
+            $('.scrollToTop').click(function (e) {
+                e.preventDefault();
+                $('html, body').animate({ scrollTop: 0 }, 300);
+            });
+
+            // Mobile Menu
+            $('.header-bar').click(function () {
+                $('.menu, .overlay').toggleClass('active');
+            });
+
+            $('.overlay').click(function () {
+                $('.menu, .overlay').removeClass('active');
+            });
+
+            // FAQ Accordion
+            $('.faq-title').click(function () {
+                $(this).parent().toggleClass('active');
+                $(this).parent().siblings().removeClass('active');
+            });
+
+            // Add animation classes on scroll
+            function checkScroll() {
+                $('.animate__animated').each(function () {
+                    var elementTop = $(this).offset().top;
+                    var elementBottom = elementTop + $(this).outerHeight();
+                    var viewportTop = $(window).scrollTop();
+                    var viewportBottom = viewportTop + $(window).height();
+
+                    if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                        $(this).addClass('animate__fadeInUp');
+                    }
+                });
+            }
+
+            // Check scroll on page load and scroll
+            checkScroll();
+            $(window).scroll(checkScroll);
+        });
+    </script>
 </body>
 
 </html>
