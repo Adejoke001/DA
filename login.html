@@ -5,29 +5,137 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>LV - Find Your Perfect Match</title>
 
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/animate.css">
-  <link rel="stylesheet" href="assets/css/flaticon.css">
-  <link rel="stylesheet" href="assets/css/magnific-popup.css">
-  <link rel="stylesheet" href="assets/css/odometer.css">
-  <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-  <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
-  <link rel="stylesheet" href="assets/css/nice-select.css">
-  <link rel="stylesheet" href="assets/css/jquery.animatedheadline.css">
-  <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="assets/css/responsive.css">
-  <link rel="stylesheet" href="assets/css/dark.css">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <title>Peyamba - Dating Website HTML Template</title>
+  <!-- Animate.css CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
+  <!-- Custom Styles -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+    :root {
+      --primary: #ec4899;
+      --primary-dark: #db2777;
+      --secondary: #f59e0b;
+      --dark: #111827;
+      --dark-light: #1f2937;
+      --light: #f9fafb;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--dark);
+      color: var(--light);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+    }
+
+    .card-dark {
+      background-color: var(--dark-light);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .preloader-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .preloader-icon {
+      display: flex;
+      margin-bottom: 1rem;
+    }
+
+    .preloader-icon span {
+      display: block;
+      width: 20px;
+      height: 20px;
+      background: var(--primary);
+      border-radius: 50%;
+      margin: 0 5px;
+      animation: bounce 1.5s infinite ease-in-out;
+    }
+
+    .preloader-icon span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    .login-bg {
+      background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(31, 41, 55, 0.8) 100%),
+        url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+      background-size: cover;
+    }
+
+    .form-input {
+      background-color: rgba(31, 41, 55, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.2);
+    }
+  </style>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#ec4899',
+            'primary-dark': '#db2777',
+            secondary: '#f59e0b',
+            dark: '#111827',
+            'dark-light': '#1f2937',
+            light: '#f9fafb',
+          },
+          fontFamily: {
+            'inter': ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
 </head>
 
-<body>
+<body class="font-inter">
   <!-- ==========Preloader========== -->
   <div class="preloader">
     <div class="preloader-inner">
@@ -35,95 +143,120 @@
         <span></span>
         <span></span>
       </div>
+      <p class="text-white">Loading...</p>
     </div>
   </div>
   <!-- ==========Preloader========== -->
 
-
-
-  <!-- ========== Login & Registation Section ========== -->
-  <section class="log-reg">
-    <div class="top-menu-area">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-5">
-            <a href="index.html" class="backto-home"><i class="fas fa-chevron-left"></i> Back to peyamba</a>
+  <!-- ========== Login & Registration Section ========== -->
+  <section class="log-reg min-h-screen login-bg flex items-center justify-center py-12 px-4">
+    <div class="container mx-auto max-w-6xl">
+      <!-- Top Menu Area -->
+      <div class="mb-8">
+        <div class="flex flex-col lg:flex-row justify-between items-center">
+          <div class="mb-4 lg:mb-0">
+            <a href="index.html" class="text-white hover:text-primary transition-colors duration-300 flex items-center">
+              <i class="fas fa-chevron-left mr-2"></i> Back to Lovers' Vow
+            </a>
           </div>
-          <div class="col-lg-7 ">
-            <div class="logo">
-              <img src="assets/images/logo2.png" alt="logo">
+          <div class="flex items-center">
+            <div
+              class="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center mr-3 shadow-lg">
+              <i class="fas fa-heart text-white"></i>
             </div>
+            <span class="text-xl font-bold text-white">Lovers'<span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Vow</span></span>
           </div>
         </div>
       </div>
-    </div>
-    <div class="container">
-      <div class="row justify-content-end">
-        <div class="image image-log">
+
+      <div class="flex flex-col lg:flex-row items-center justify-center">
+        <!-- Image Section (Hidden on mobile) -->
+        <div class="hidden lg:block lg:w-1/2 mb-10 lg:mb-0 lg:pr-12 animate__animated animate__fadeInLeft">
+          <div class="rounded-2xl overflow-hidden shadow-2xl">
+            <img
+              src="https://images.unsplash.com/photo-1513279922550-250c2129b13a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGxvdmV8ZW58MHx8MHx8fDA%3D"
+              alt="Happy couple" class="w-full h-auto object-cover">
+          </div>
+          <div class="mt-6 text-center">
+            <h3 class="text-2xl font-bold text-white mb-2">Join Our Community</h3>
+            <p class="text-gray-300">Find your perfect match among thousands of verified members</p>
+          </div>
         </div>
-        <div class="col-lg-7">
-          <div class="log-reg-inner">
-            <div class="section-header inloginp">
-              <h2 class="title">
-                Welcome to PEYAMBA
-              </h2>
+
+        <!-- Login Form -->
+        <div class="w-full lg:w-1/2 animate__animated animate__fadeInRight">
+          <div class="card-dark rounded-2xl p-8 shadow-2xl">
+            <div class="text-center mb-8">
+              <h2 class="text-3xl font-bold text-white mb-2">Welcome to Lovers' Vow</h2>
+              <p class="text-gray-300">Sign in to your account</p>
             </div>
-            <div class="main-content inloginp">
-              <form action="#">
-                <div class="form-group">
-                  <label for="">Your Address</label>
-                  <input type="email" class="my-form-control" placeholder="Enter Your Email">
-                </div>
-                <div class="form-group">
-                  <label for="">Password</label>
-                  <input type="text" class="my-form-control" placeholder="Enter Your Password">
-                </div>
-                <p class="f-pass">
-                  Forgot your password? <a href="#">recover password</a>
+
+            <form action="#">
+              <div class="mb-6">
+                <label for="email" class="block text-gray-300 mb-2 font-medium">Your Email</label>
+                <input type="email" id="email"
+                  class="w-full form-input rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="Enter Your Email">
+              </div>
+
+              <div class="mb-4">
+                <label for="password" class="block text-gray-300 mb-2 font-medium">Password</label>
+                <input type="password" id="password"
+                  class="w-full form-input rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="Enter Your Password">
+              </div>
+
+              <div class="flex justify-end mb-6">
+                <a href="#" class="text-primary hover:text-primary-dark transition-colors duration-300 text-sm">
+                  Forgot your password?
+                </a>
+              </div>
+
+              <button type="submit"
+                class="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-amber-600 text-white font-bold py-3 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl mb-6">
+                Sign In
+              </button>
+
+              <div class="flex items-center my-6">
+                <div class="flex-grow border-t border-gray-600"></div>
+                <span class="mx-4 text-gray-400">OR</span>
+                <div class="flex-grow border-t border-gray-600"></div>
+              </div>
+
+              <div class="text-center">
+                <p class="text-gray-300 mb-4">Sign in with your social account</p>
+                <a href="#"
+                  class="w-full bg-white hover:bg-gray-100 text-gray-800 font-medium py-3 rounded-lg transition-colors duration-300 flex items-center justify-center mb-4">
+                  <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Google" class="w-5 h-5 mr-3">
+                  Continue with Google
+                </a>
+
+                <p class="text-gray-300 mt-6">
+                  Don't have an account?
+                  <a href="register.html"
+                    class="text-primary hover:text-primary-dark font-medium transition-colors duration-300">
+                    Sign up here
+                  </a>
                 </p>
-                <div class="button-wrapper">
-                  <button type="submit" class="custom-button">Sign IN</button>
-                </div>
-                <div class="or">
-                  <p>OR</p>
-                </div>
-                <div class="or-content">
-                  <p>Sign up with your email</p>
-                  <a href="#" class="or-btn"><img src="assets/images/google.png" alt=""> Sign Up with Google</a>
-                  <p class="or-signup">
-                    Don't have an account? <a href="register.html">
-                      Sign up here
-                    </a>
-                  </p>
-                </div>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </section>
+  <!-- ========== Login & Registration Section ========== -->
 
-  <!-- ========== Login & Registation Section ========== -->
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-
-
-
-  <script src="assets/js/jquery-3.3.1.min.js"></script>
-  <script src="assets/js/modernizr-3.6.0.min.js"></script>
-  <script src="assets/js/plugins.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
-  <script src="assets/js/heandline.js"></script>
-  <script src="assets/js/isotope.pkgd.min.js"></script>
-  <script src="assets/js/magnific-popup.min.js"></script>
-  <script src="assets/js/owl.carousel.min.js"></script>
-  <script src="assets/js/wow.min.js"></script>
-  <script src="assets/js/countdown.min.js"></script>
-  <script src="assets/js/odometer.min.js"></script>
-  <script src="assets/js/viewport.jquery.js"></script>
-  <script src="assets/js/nice-select.js"></script>
-  <script src="assets/js/main.js"></script>
-<script defer="" src="../../beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"6e6444122ed94892b6dff27396bb5627","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function () {
+      // Hide preloader
+      $('.preloader').fadeOut(500);
+    });
+  </script>
 </body>
 
 </html>

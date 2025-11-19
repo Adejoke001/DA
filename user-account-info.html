@@ -5,654 +5,946 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lovers' Vow - Account Settings</title>
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/flaticon.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/odometer.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="assets/css/nice-select.css">
-    <link rel="stylesheet" href="assets/css/jquery.animatedheadline.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/dark.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <title>Peyamba - Dating Website HTML Template</title>
+    <!-- Animate.css CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
+    <!-- Custom Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+        :root {
+            --primary: #ec4899;
+            --primary-dark: #db2777;
+            --secondary: #f59e0b;
+            --dark: #111827;
+            --dark-light: #1f2937;
+            --light: #f9fafb;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: var(--light);
+        }
+        
+        .navbar-blur {
+            backdrop-filter: blur(15px);
+            background-color: rgba(26, 26, 46, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .card-dark {
+            background: linear-gradient(145deg, rgba(31, 41, 55, 0.9), rgba(17, 24, 39, 0.9));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .preloader-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .preloader-icon {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+
+        .preloader-icon span {
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin: 0 5px;
+            animation: bounce 1.5s infinite ease-in-out;
+        }
+
+        .preloader-icon span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .scrollToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+        }
+
+        .scrollToTop.show {
+            opacity: 1;
+        }
+
+        .header-bar {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .header-bar span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+        }
+
+        .form-input {
+            background: rgba(31, 41, 55, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+            background: rgba(31, 41, 55, 0.9);
+        }
+
+        .select-input {
+            background: rgba(31, 41, 55, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .select-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+            background: rgba(31, 41, 55, 0.9);
+        }
+
+        .accordion-item {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            background: rgba(31, 41, 55, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        .accordion-item:hover {
+            background: rgba(31, 41, 55, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .accordion-header {
+            background: rgba(31, 41, 55, 0.7);
+            padding: 1.25rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header.active {
+            background: linear-gradient(90deg, rgba(236, 72, 153, 0.2), rgba(245, 158, 11, 0.2));
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .accordion-content.active {
+            max-height: 500px;
+        }
+
+        .accordion-links {
+            padding: 1.25rem;
+            background: rgba(17, 24, 39, 0.5);
+        }
+
+        .accordion-links a {
+            display: block;
+            padding: 0.75rem 0;
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .accordion-links a:last-child {
+            border-bottom: none;
+        }
+
+        .accordion-links a:hover, .accordion-links a.active {
+            color: var(--primary);
+            padding-left: 10px;
+            background: rgba(236, 72, 153, 0.1);
+            border-radius: 5px;
+        }
+
+        .menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: var(--dark-light);
+            flex-direction: column;
+            padding: 80px 20px 20px;
+            transition: all 0.3s ease;
+            z-index: 998;
+        }
+
+        .menu.active {
+            right: 0;
+        }
+
+        .menu li {
+            margin: 15px 0;
+        }
+
+        .menu li a {
+            color: white !important;
+            font-size: 18px;
+            padding: 10px 0;
+            display: block;
+            width: 100%;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 997;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .breadcrumb-section {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(31, 41, 55, 0.8) 100%), 
+                        url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .breadcrumb-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(236, 72, 153, 0.2), rgba(245, 158, 11, 0.2));
+            z-index: 1;
+        }
+
+        .breadcrumb-section > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .info-box {
+            background: linear-gradient(145deg, rgba(31, 41, 55, 0.9), rgba(17, 24, 39, 0.9));
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .info-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-box-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .info-box-header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            bottom: 10%;
+            right: 5%;
+            animation-delay: 2s;
+        }
+
+        .shape-3 {
+            width: 100px;
+            height: 100px;
+            top: 50%;
+            right: 10%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .header-bar {
+                display: flex;
+            }
+        }
+    </style>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ec4899',
+                        'primary-dark': '#db2777',
+                        secondary: '#f59e0b',
+                        dark: '#111827',
+                        'dark-light': '#1f2937',
+                        light: '#f9fafb',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
-<body>
-    <!-- ==========Preloader========== -->
+<body class="font-inter">
+    <!-- Preloader -->
     <div class="preloader">
         <div class="preloader-inner">
             <div class="preloader-icon">
                 <span></span>
                 <span></span>
             </div>
+            <p>Loading...</p>
         </div>
     </div>
-    <!-- ==========Preloader========== -->
-    <!-- ==========Overlay========== -->
+
+    <!-- Overlay -->
     <div class="overlay"></div>
+
+    <!-- Scroll to Top -->
     <a href="#" class="scrollToTop">
         <i class="fas fa-angle-up"></i>
     </a>
-    <!-- ==========Overlay========== -->
 
-    <!-- ==========Header-Section========== -->
-<header class="header-section">
-    <div class="container">
-        <div class="header-wrapper">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="assets/images/logo/logo.png" alt="logo">
-                </a>
-            </div>
-            <ul class="menu">
-                <li>
-                    <a href="#">Home</a>
-                    <ul class="submenu">
-                        <li>
-                            <a href="index.html">Home One</a>
-                        </li>
-                        <li>
-                            <a href="index2.html">Home Two</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="community.html">Community</a>
-                </li>
-                <li>
-                    <a href="membership.html">Membership</a>
-                </li>
-                <li>
-                    <a href="shop2.html">Shop</a>
-                </li>
-                <li>
-                    <a href="#" class="active">pages</a>
-                    <ul class="submenu">
-                        <li>
-                            <a href="user-setting.html">User Panel</a>
-                        </li>
-                        <li>
-                            <a href="about.html">About Us</a>
-                        </li>
-                        <li>
-                            <a href="community-single.html">Community Single</a>
-                        </li>
-                        <li>
-                            <a href="members.html">Members</a>
-                        </li>
-                        <li>
-                            <a href="shop3.html">Shop sidebar</a>
-                        </li>
-                        <li>
-                            <a href="single-profile.html">Single Profile One</a>
-                        </li>
-                        <li>
-                            <a href="single-profile2.html">Single Profile Two</a>
-                        </li>
-                        <li>
-                            <a href="single-profile3.html">Single Profile Three</a>
-                        </li>
-                        <li>
-                            <a href="single-shope.html">Shop Details</a>
-                        </li>
-                        <li>
-                            <a href="contact.html">Contact</a>
-                        </li>
-                        <li>
-                            <a href="login.html">Login</a>
-                        </li>
-                        <li>
-                            <a href="register.html">Register</a>
-                        </li>
-                        <li>
-                            <a href="404.html">404</a>
-                        </li>
-                        <li>
-                            <a href="503.html">503</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">blog</a>
-                    <ul class="submenu">
-                        <li>
-                            <a href="blog.html">Blog</a>
-                        </li>
-                        <li>
-                            <a href="blog-details.html">Blog Single</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="separator">
-                    <span>|</span>
-                </li>
-                <li>
-                    <div class="serch-icon">
-                        <i class="fas fa-search"></i>
+    <!-- Navigation -->
+    <nav class="navbar-blur fixed w-full z-50 py-4">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <!-- Navbar Brand -->
+                <div class="flex items-center">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center mr-3 shadow-lg">
+                        <i class="fas fa-heart text-white"></i>
                     </div>
-                </li>
-                <li>
-                    <div class="language-select">
-                        <select class="select-bar">
-                            <option value="">EN</option>
-                            <option value="">IN</option>
-                            <option value="">BN</option>
-                        </select>
-                    </div>
-                </li>
-                <li class="user-profile">
-                    <a href="#">
-                        <img src="assets/images/user-demo.png" alt="">
-                    </a>
-                    <ul class="submenu">
-                        <li>
-                            <a href="#">Profile</a>
-                        </li>
-                        <li>
-                            <a href="#">Logout</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="header-bar d-lg-none">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </div>
-</header>
-    <div class="search-overlay">
-        <div class="close"><i class="fas fa-times"></i></div>
-        <form action="#">
-            <input type="text" placeholder="Write what you want..">
-        </form>
-    </div>
-    <!-- ==========Header-Section========== -->
+                    <span class="text-xl font-bold text-white">Lovers'<span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Vow</span></span>
+                </div>
 
-    <!-- ==========Breadcrumb-Section========== -->
-    <section class="breadcrumb-area profile-bc-area">
-        <div class="container">
-            <div class="content">
-                <h2 class="title extra-padding">
-                    Setting
-                </h2>
-                <ul class="breadcrumb-list extra-padding">
+                <!-- Desktop Menu-->
+                <ul class="menu hidden lg:flex items-center space-x-8">
                     <li>
-                        <a href="index.html">
-                            Home
+                        <a href="about.html"
+                            class="text-gray-300 hover:text-white transition-colors duration-300 font-medium relative group">
+                            About
+                            <span
+                                class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300 group-hover:w-full"></span>
                         </a>
                     </li>
-
                     <li>
-                        Setting
+                        <a href="community.html" class="text-white font-medium relative group">
+                            Community
+                            <span
+                                class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-primary to-secondary"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="membership.html"
+                            class="text-gray-300 hover:text-white transition-colors duration-300 font-medium relative group">
+                            Membership
+                            <span
+                                class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Auth Buttons -->
+                <div class="hidden lg:flex items-center space-x-4">
+                    <a href="login.html"
+                        class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Log In</a>
+                    <a href="register.html"
+                        class="bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-amber-600 text-white px-6 py-2.5 rounded-lg transition-all duration-300 font-medium shadow-lg hover:shadow-xl">
+                        Sign Up
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="header-bar lg:hidden">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <ul class="menu lg:hidden">
+        <li>
+            <a href="about.html" class="text-white font-medium block py-3 border-b border-gray-700">About</a>
+        </li>
+        <li>
+            <a href="community.html" class="text-white font-medium block py-3 border-b border-gray-700">Community</a>
+        </li>
+        <li>
+            <a href="membership.html"
+                class="text-gray-300 hover:text-white transition-colors duration-300 font-medium block py-3 border-b border-gray-700">Membership</a>
+        </li>
+        <li class="pt-6 border-t border-gray-700 mt-4">
+            <a href="login.html"
+                class="bg-transparent border border-gray-600 text-white px-4 py-3 rounded-lg hover:bg-gray-800 transition-colors duration-300 font-medium block text-center">
+                Log In
+            </a>
+        </li>
+        <li class="pt-4">
+            <a href="register.html"
+                class="bg-gradient-to-r from-primary to-secondary text-white px-4 py-3 rounded-lg transition-colors duration-300 font-medium block text-center">
+                Sign Up
+            </a>
+        </li>
+    </ul>
+
+    <!-- Breadcrumb Section -->
+    <section class="breadcrumb-section py-20 pt-32">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        
+        <div class="container mx-auto px-4">
+            <div class="text-center animate__animated animate__fadeIn">
+                <h2 class="text-5xl font-bold text-white mb-6">
+                    Account <span class="section-title">Settings</span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
+                    Manage your profile, security, and account preferences in one place
+                </p>
+                <ul class="flex justify-center space-x-4 text-gray-300">
+                    <li>
+                        <a href="index.html" class="hover:text-primary transition-colors duration-300 flex items-center">
+                            <i class="fas fa-home mr-2"></i> Home
+                        </a>
+                    </li>
+                    <li>
+                        <span class="mx-2 text-primary">/</span>
+                    </li>
+                    <li>
+                        <span class="text-primary font-medium">Settings</span>
                     </li>
                 </ul>
             </div>
         </div>
     </section>
-    <!-- ==========Breadcrumb-Section========== -->
 
-
-    <!-- ========= Profile Section Start -->
-
-    <section class="user-setting-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-4 col-md-5">
-                    <div class="accordion" id="accordionExample">
-                        <div class="card">
-                          <div class="card-header" id="headingOne">
-                              <button class="" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <div class="icon">
-                                    <i class="fas fa-user"></i>
-                                </div> 
-                                <span>My Profile</span>
-                                <div class="t-icon">
-                                    <i class="fas fa-plus"></i>
-                                    <i class="fas fa-minus"></i>
+    <!-- Profile Section -->
+    <section class="py-16 relative overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- Sidebar -->
+                <div class="lg:col-span-1">
+                    <div class="card-dark rounded-2xl p-6 sticky top-24">
+                        <h3 class="text-xl font-bold text-white mb-6 pb-3 border-b border-gray-700">Settings Menu</h3>
+                        <div class="accordion-container">
+                            <!-- My Profile Accordion -->
+                            <div class="accordion-item">
+                                <div class="accordion-header active">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-primary/20 text-primary rounded-full flex items-center justify-center mr-3">
+                                            <i class="fas fa-user text-sm"></i>
+                                        </div>
+                                        <span class="font-medium">My Profile</span>
+                                    </div>
+                                    <div class="transform transition-transform">
+                                        <i class="fas fa-minus text-primary"></i>
+                                    </div>
                                 </div>
-                              </button>
-                          </div>
-                      
-                          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <div class="card-body">
-                              <ul class="links">
-                                  <li>
-                                      <a href="user-setting.html">Profile Info</a>
-                                  </li>
-                                  <li>
-                                      <a href="user-notification.html">Notifications</a>
-                                  </li>
-                                  <li>
-                                      <a href="user-friend-request.html">Friend Requests</a>
-                                  </li>
-                                  <li>
-                                      <a href="user-badges.html">Badges</a>
-                                  </li>
-                              </ul>
+                                <div class="accordion-content active">
+                                    <div class="accordion-links">
+                                        <a href="user-setting.html">Profile Info</a>
+                                        <a href="user-notification.html">Notifications</a>
+                                        <a href="user-friend-request.html">Friend Requests</a>
+                                        <a href="user-badges.html">Badges</a>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
-                        </div>
-                        <div class="card">
-                          <div class="card-header" id="headingTwo">
-                              <button class="collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <div class="icon">
-                                    <i class="fas fa-cogs"></i>
-                                </div> 
-                                <span>
-                                    Account
-                                </span>
-                                <div class="t-icon">
-                                    <i class="fas fa-plus"></i>
-                                    <i class="fas fa-minus"></i>
+
+                            <!-- Account Accordion -->
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-secondary/20 text-secondary rounded-full flex items-center justify-center mr-3">
+                                            <i class="fas fa-cogs text-sm"></i>
+                                        </div>
+                                        <span class="font-medium">Account</span>
+                                    </div>
+                                    <div class="transform transition-transform">
+                                        <i class="fas fa-plus text-gray-400"></i>
+                                    </div>
                                 </div>
-                              </button>
-                          </div>
-                          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                            <div class="card-body">
-                                <ul class="links">
-                                    <li>
-                                        <a class="active" href="user-account-info.html">Account Info</a>
-                                    </li>
-                                    <li>
+                                <div class="accordion-content">
+                                    <div class="accordion-links">
+                                        <a href="user-account-info.html" class="active">Account Info</a>
                                         <a href="user-change-pass.html">Change Password</a>
-                                    </li>
-                                    <li>
                                         <a href="user-privicy-setting.html">Privacy Settings</a>
-                                    </li>
-                                    <li>
-                                        <a href="user-verify-account.html">Verified account</a>
-                                    </li>
-                                    <li>
+                                        <a href="user-verify-account.html">Verified Account</a>
                                         <a href="user-close-account.html">Close Account</a>
-                                    </li>
-                                </ul>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card">
-                          <div class="card-header" id="headingThree">
-                              <button class="collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                <div class="icon">
-                                    <i class="far fa-credit-card"></i>
-                                </div> 
-                                <span>
-                                    Subscriptions & Payments
-                                </span>
-                                <div class="t-icon">
-                                    <i class="fas fa-plus"></i>
-                                    <i class="fas fa-minus"></i>
+                                    </div>
                                 </div>
-                              </button>
-                          </div>
-                          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                            <div class="card-body">
-                                <ul class="links">
-                                    <li>
+                            </div>
+
+                            <!-- Subscriptions & Payments Accordion -->
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-blue-500/20 text-blue-500 rounded-full flex items-center justify-center mr-3">
+                                            <i class="far fa-credit-card text-sm"></i>
+                                        </div>
+                                        <span class="font-medium">Subscriptions & Payments</span>
+                                    </div>
+                                    <div class="transform transition-transform">
+                                        <i class="fas fa-plus text-gray-400"></i>
+                                    </div>
+                                </div>
+                                <div class="accordion-content">
+                                    <div class="accordion-links">
                                         <a href="user-billing.html">Billing & Payout</a>
-                                    </li>
-                                    <li>
                                         <a href="user-plan.html">Upgrade Membership Plan</a>
-                                    </li>
-                                    <li>
                                         <a href="user-purchase.html">View Purchase History</a>
-                                    </li>
-                                </ul>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
                         </div>
-                      </div>
+                    </div>
                 </div>
-                <div class="col-xl-8 col-md-7 ">
-                    <div class="page-title">
-                        Account Info
-                    </div>
-                    
-                    <div class="input-info-box mt-30">
-                        <div class="header">
-                            Personal Info
+
+                <!-- Main Content -->
+                <div class="lg:col-span-3">
+                    <div class="card-dark rounded-2xl p-8 animate__animated animate__fadeInUp">
+                        <div class="flex items-center mb-8">
+                            <div class="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-user-cog text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">Account Information</h3>
+                                <p class="text-gray-400">Update your personal and security information</p>
+                            </div>
                         </div>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="my-input-box">
-                                        <label for="">Profile Name</label>
-                                        <input type="text" placeholder="Profile Name">
-                                    </div>
+                        
+                        <!-- Personal Info Section -->
+                        <div class="info-box">
+                            <div class="info-box-header">
+                                <h4 class="text-xl font-bold text-white">Personal Information</h4>
+                                <p class="text-gray-400 mt-1">Update your basic profile details</p>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-300 mb-2 font-medium">Profile Name</label>
+                                    <input type="text" class="w-full form-input rounded-lg px-4 py-3" placeholder="Your display name">
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="my-input-box">
-                                        <label for="">Public Email</label>
-                                        <input type="text" placeholder="Public Email">
-                                    </div>
+                                <div>
+                                    <label class="block text-gray-300 mb-2 font-medium">Public Email</label>
+                                    <input type="email" class="w-full form-input rounded-lg px-4 py-3" placeholder="email@example.com">
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="my-input-box">
-                                        <label for="">Country</label>
-                                        <select name="" id="">
-                                            <option value="" disabled="" selected="">Select Country</option>
-                                            <option value="">United State</option>
-                                        </select>
-                                    </div>
+                                <div>
+                                    <label class="block text-gray-300 mb-2 font-medium">Country</label>
+                                    <select class="select-input">
+                                        <option value="" disabled selected>Select Country</option>
+                                        <option value="US">United States</option>
+                                        <option value="UK">United Kingdom</option>
+                                        <option value="CA">Canada</option>
+                                        <option value="AU">Australia</option>
+                                        <option value="DE">Germany</option>
+                                        <option value="FR">France</option>
+                                        <option value="JP">Japan</option>
+                                        <option value="BR">Brazil</option>
+                                        <option value="IN">India</option>
+                                        <option value="ZA">South Africa</option>
+                                        <option value="NG">Nigeria</option>
+                                        <option value="KE">Kenya</option>
+                                        <option value="GH">Ghana</option>
+                                    </select>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="my-input-box">
-                                        <label for="">City</label>
-                                        <select name="" id="">
-                                            <option value="" disabled="" selected="">Select City</option>
-                                            <option value="">New Work</option>
-                                        </select>
-                                    </div>
+                                <div>
+                                    <label class="block text-gray-300 mb-2 font-medium">City</label>
+                                    <input type="text" class="w-full form-input rounded-lg px-4 py-3" placeholder="Enter your city">
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="input-info-box mt-30">
-                        <div class="header">
-                            Security Info
-                        </div>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="my-input-box">
-                                        <label for="">Recovery Email</label>
-                                        <input type="email" placeholder="Recovery Email">
-                                    </div>
+
+                        <!-- Security Info Section -->
+                        <div class="info-box">
+                            <div class="info-box-header">
+                                <h4 class="text-xl font-bold text-white">Security Information</h4>
+                                <p class="text-gray-400 mt-1">Manage your account security settings</p>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-300 mb-2 font-medium">Recovery Email</label>
+                                    <input type="email" class="w-full form-input rounded-lg px-4 py-3" placeholder="recovery@example.com">
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="my-input-box">
-                                        <label for="">Recovery Phone</label>
-                                        <input type="text" placeholder="Recovery Phone">
-                                    </div>
+                                <div>
+                                    <label class="block text-gray-300 mb-2 font-medium">Recovery Phone</label>
+                                    <input type="text" class="w-full form-input rounded-lg px-4 py-3" placeholder="+1 (555) 123-4567">
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="my-input-box">
-                                        <label for="">Security Question 01</label>
-                                        <select name="" id="">
-                                            <option value="">What is your favorite movie?</option>
-                                        </select>
-                                    </div>
+                                <div>
+                                    <label class="block text-gray-300 mb-2 font-medium">Security Question 01</label>
+                                    <select class="select-input">
+                                        <option value="">What is your favorite movie?</option>
+                                        <option value="town">In what town was your first job?</option>
+                                        <option value="pet">What was your first pet's name?</option>
+                                        <option value="school">What was the name of your elementary school?</option>
+                                    </select>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="my-input-box">
-                                        <label for="">Answer 01</label>
-                                        <input type="text" placeholder="Answer 01">
-                                    </div>
+                                <div>
+                                    <label class="block text-gray-300 mb-2 font-medium">Answer 01</label>
+                                    <input type="text" class="w-full form-input rounded-lg px-4 py-3" placeholder="Your answer">
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="my-input-box">
-                                        <label for="">Security Question 02</label>
-                                        <select name="" id="">
-                                            <option value="">In what town was your first job?</option>
-                                        </select>
-                                    </div>
+                                <div>
+                                    <label class="block text-gray-300 mb-2 font-medium">Security Question 02</label>
+                                    <select class="select-input">
+                                        <option value="">In what town was your first job?</option>
+                                        <option value="movie">What is your favorite movie?</option>
+                                        <option value="pet">What was your first pet's name?</option>
+                                        <option value="school">What was the name of your elementary school?</option>
+                                    </select>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="my-input-box">
-                                        <label for="">Answer 02</label>
-                                        <input type="text" placeholder="Answer 02">
-                                    </div>
+                                <div>
+                                    <label class="block text-gray-300 mb-2 font-medium">Answer 02</label>
+                                    <input type="text" class="w-full form-input rounded-lg px-4 py-3" placeholder="Your answer">
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="buttons  mt-30">
-                        <button type="submit" class="custom-button">Save Changes</button>
-                        <button class="custom-button2">Discard All</button>
+
+                        <!-- Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4 mt-8">
+                            <button class="bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-amber-600 text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl flex items-center">
+                                <i class="fas fa-save mr-2"></i> Save Changes
+                            </button>
+                            <button class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-300 flex items-center">
+                                <i class="fas fa-times mr-2"></i> Discard All
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ========= Profile Section Start -->
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Column 1: Brand & Social -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 bg-pink-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold">LV</span>
+                        </div>
+                        <span class="text-xl font-bold">Lovers'Vow</span>
+                    </div>
+                    <p class="text-gray-300 mb-6 text-lg">
+                        Connect with amazing people and find meaningful relationships.
+                    </p>
+                    <!-- Social Icons -->
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 hover:bg-pink-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 hover:bg-pink-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 hover:bg-pink-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 hover:bg-pink-600 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
 
+                <!-- Column 2: Documents -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6 text-pink-400">Documents</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-pink-500 text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-pink-500 text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Terms of use
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-pink-500 text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Customer Support
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-pink-500 text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Website rules
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-    <!-- ==========Newslater-Section========== -->
-    <footer class="footer-section">
-        <img class="shape1" src="assets/images/footer/f-shape.png" alt="">
-        <img class="shape2" src="assets/images/footer/flower01.png" alt="">
-        <img class="shape3" src="assets/images/footer/right-shape.png" alt="">
-       <div class="newslater-section">
-           <div class="container">
-               <div class="row justify-content-center">
-                   <div class="col-lg-6 col-md-8">
-                       <div class="newslater-container">
-                           <div class="newslater-wrapper">
-                               <div class="icon">
-                                   <img src="assets/images/footer/n-icon.png" alt="">
-                               </div>
-                               <p class="text">Sign up to recieve a monthly email on the latest news!</p>
-                               <form class="newslater-form">
-                                   <input type="text" placeholder="Your Email Address">
-                                   <button type="submit"> 
-                                       <i class="fab fa-telegram-plane"></i>
-                                   </button>
-                               </form>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
-       <div class="container">
-           <div class="footer-links">
-               <div class="row">
-                   <div class="col-lg-12">
-                       <hr class="hr">
-                   </div>
-               </div>
-               <div class="row">
-                   <div class="col-lg-3 col-sm-6">
-                       <div class="link-wrapper one">
-                           <h4 class="f-l-title">
-                               Our Information
-                           </h4>
-                           <ul class="f-solial-links">
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  About Us
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Contact Us
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Customer Reviews
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Success Stories
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  Business License
-                                   </a>
-                               </li>
-                           </ul>
-                       </div>
-                   </div>
-                   <div class="col-lg-3 col-sm-6">
-                       <div class="link-wrapper two">
-                           <h4 class="f-l-title">
-                               My Account
-                           </h4>
-                           <ul class="f-solial-links">
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Manage Account
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  Safety Tips
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Account Varification
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Safety & Security
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Membership Level
-                                   </a>
-                               </li>
-                           </ul>
-                       </div>
-                   </div>
-                   <div class="col-lg-3 col-sm-6">
-                       <div class="link-wrapper three">
-                           <h4 class="f-l-title">
-                               help center
-                           </h4>
-                           <ul class="f-solial-links">
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  Help centre
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> FAQ
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>Quick Start Guide 
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>Tutorials
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>Associate Blog
-                                   </a>
-                               </li>
-                           </ul>
-                       </div>
-                   </div>
-                   <div class="col-lg-3 col-sm-6">
-                       <div class="link-wrapper four">
-                           <h4 class="f-l-title">
-                               legal 
-                           </h4>
-                           <ul class="f-solial-links">
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  Privacy policy 
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> End User Agreements
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Refund Policy
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Cookie policy
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Report abuse
-                                   </a>
-                               </li>
-                           </ul>
-                       </div>
-                   </div>
-               </div>
-           </div>
-           <div class="copyright-wrapper">
-               <div class="row">
-                   <div class="col-lg-12">
-                       <hr class="hr2">
-                   </div>
-               </div>
-               <div class="row">
-                   <div class="col-lg-6 align-self-center">
-                       <div class="copyr-text">
-                           <span>
-                               Copyright © 2021.All Rights Reserved By
-                           </span>
-                           <a href="#">Peyamba</a>
-                       </div>
-                   </div>
-                   <div class="col-lg-6">
-                       <ul class="footer-social-links">
-                           <li>
-                               <a href="#">
-                                   <i class="fab fa-twitter"></i>
-                               </a>
-                           </li>
-                           <li>
-                               <a href="#">
-                                   <i class="fab fa-facebook-f"></i>
-                               </a>
-                           </li>
-                           <li>
-                               <a href="#">
-                                   <i class="fab fa-instagram"></i>
-                               </a>
-                           </li>
-                           <li>
-                               <a href="#">
-                                   <i class="fab fa-dribbble"></i>
-                               </a>
-                           </li>
-                       </ul>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </footer> 
-    <!-- ==========Newslater-Section========== -->
+                <!-- Column 3: Information -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6 text-pink-400">Information</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-pink-500 text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Payments Rules
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-pink-500 text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Security
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-pink-500 text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="text-gray-300 hover:text-white transition-colors duration-300 flex items-center group">
+                                <i
+                                    class="fas fa-chevron-right text-pink-500 text-xs mr-3 group-hover:translate-x-1 transition-transform"></i>
+                                Help Center
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
+                <!-- Column 4: Newsletter -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6 text-pink-400">Subscribe to newsletter</h3>
+                    <p class="text-gray-300 mb-6">Stay updated with our latest features and offers</p>
+                    <div class="space-y-4">
+                        <div class="flex flex-col space-y-2">
+                            <label class="text-gray-400 text-sm font-medium">Email</label>
+                            <input type="email" placeholder="Enter your email"
+                                class="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:border-pink-500 transition-colors duration-300">
+                        </div>
+                        <button
+                            class="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
-    <script src="assets/js/modernizr-3.6.0.min.js"></script>
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/heandline.js"></script>
-    <script src="assets/js/isotope.pkgd.min.js"></script>
-    <script src="assets/js/magnific-popup.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/countdown.min.js"></script>
-    <script src="assets/js/odometer.min.js"></script>
-    <script src="assets/js/viewport.jquery.js"></script>
-    <script src="assets/js/nice-select.js"></script>
-    <script src="assets/js/main.js"></script>
-<script defer="" src="../../beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"6e6444122ed94892b6dff27396bb5627","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+            <!-- Copyright - Centered -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="text-center">
+                    <div class="text-gray-400 text-sm">
+                        © Copyright 2021, All Rights Reserved by Postcraft
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Hide preloader
+            $('.preloader').fadeOut(500);
+
+            // Scroll to Top
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 300) {
+                    $('.scrollToTop').addClass('show');
+                } else {
+                    $('.scrollToTop').removeClass('show');
+                }
+            });
+
+            $('.scrollToTop').click(function (e) {
+                e.preventDefault();
+                $('html, body').animate({ scrollTop: 0 }, 300);
+            });
+
+            // Mobile Menu
+            $('.header-bar').click(function () {
+                $('.menu, .overlay').toggleClass('active');
+            });
+
+            $('.overlay').click(function () {
+                $('.menu, .overlay').removeClass('active');
+            });
+
+            // Close mobile menu when a link is clicked
+            $('.menu a').click(function() {
+                $('.menu, .overlay').removeClass('active');
+            });
+
+            // Accordion functionality
+            $('.accordion-header').click(function() {
+                const accordionItem = $(this).closest('.accordion-item');
+                const accordionContent = accordionItem.find('.accordion-content');
+                const icon = $(this).find('i');
+                
+                // Close all other accordions
+                $('.accordion-item').not(accordionItem).find('.accordion-content').removeClass('active');
+                $('.accordion-item').not(accordionItem).find('.accordion-header').removeClass('active');
+                $('.accordion-item').not(accordionItem).find('.accordion-header i').removeClass('fa-minus').addClass('fa-plus');
+                
+                // Toggle current accordion
+                accordionContent.toggleClass('active');
+                $(this).toggleClass('active');
+                
+                // Toggle icon
+                if (accordionContent.hasClass('active')) {
+                    icon.removeClass('fa-plus').addClass('fa-minus');
+                } else {
+                    icon.removeClass('fa-minus').addClass('fa-plus');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

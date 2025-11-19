@@ -5,29 +5,228 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lovers' Vow - Create Your Account</title>
 
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/animate.css">
-  <link rel="stylesheet" href="assets/css/flaticon.css">
-  <link rel="stylesheet" href="assets/css/magnific-popup.css">
-  <link rel="stylesheet" href="assets/css/odometer.css">
-  <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-  <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
-  <link rel="stylesheet" href="assets/css/nice-select.css">
-  <link rel="stylesheet" href="assets/css/jquery.animatedheadline.css">
-  <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="assets/css/responsive.css">
-  <link rel="stylesheet" href="assets/css/dark.css">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <title>Peyamba - Dating Website HTML Template</title>
+  <!-- Animate.css CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
+  <!-- Custom Styles -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+    :root {
+      --primary: #ec4899;
+      --primary-dark: #db2777;
+      --secondary: #f59e0b;
+      --dark: #111827;
+      --dark-light: #1f2937;
+      --light: #f9fafb;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--dark);
+      color: var(--light);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+    }
+
+    .card-dark {
+      background-color: var(--dark-light);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .preloader-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .preloader-icon {
+      display: flex;
+      margin-bottom: 1rem;
+    }
+
+    .preloader-icon span {
+      display: block;
+      width: 20px;
+      height: 20px;
+      background: var(--primary);
+      border-radius: 50%;
+      margin: 0 5px;
+      animation: bounce 1.5s infinite ease-in-out;
+    }
+
+    .preloader-icon span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    .register-bg {
+      background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(31, 41, 55, 0.8) 100%),
+          url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+      background-size: cover;
+    }
+
+    .form-input {
+      background-color: rgba(31, 41, 55, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.2);
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      margin-right: 1rem;
+    }
+
+    .radio-option input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      margin-right: 8px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .radio-option input[type="radio"]:checked {
+      border-color: var(--primary);
+    }
+
+    .radio-option input[type="radio"]:checked::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 8px;
+      background: var(--primary);
+      border-radius: 50%;
+    }
+
+    .radio-option label {
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .radio-option input[type="radio"]:checked + label {
+      color: white;
+    }
+
+    .select-input {
+      background-color: rgba(31, 41, 55, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .select-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.2);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: var(--dark-light);
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
+  </style>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#ec4899',
+            'primary-dark': '#db2777',
+            secondary: '#f59e0b',
+            dark: '#111827',
+            'dark-light': '#1f2937',
+            light: '#f9fafb',
+          },
+          fontFamily: {
+            'inter': ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
 </head>
 
-<body>
+<body class="font-inter">
   <!-- ==========Preloader========== -->
   <div class="preloader">
     <div class="preloader-inner">
@@ -35,166 +234,198 @@
         <span></span>
         <span></span>
       </div>
+      <p class="text-white">Loading...</p>
     </div>
   </div>
   <!-- ==========Preloader========== -->
 
-
-
-  <!-- ========== Login & Registation Section ========== -->
-  <section class="log-reg">
-    <div class="top-menu-area">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-5">
-            <a href="index.html" class="backto-home"><i class="fas fa-chevron-left"></i> Back to peyamba</a>
+  <!-- ========== Registration Section ========== -->
+  <section class="log-reg min-h-screen register-bg py-12 px-4">
+    <div class="container mx-auto max-w-6xl">
+      <!-- Top Menu Area -->
+      <div class="mb-8">
+        <div class="flex flex-col lg:flex-row justify-between items-center">
+          <div class="mb-4 lg:mb-0">
+            <a href="index.html" class="text-white hover:text-primary transition-colors duration-300 flex items-center">
+              <i class="fas fa-chevron-left mr-2"></i> Back to Lovers' Vow
+            </a>
           </div>
-          <div class="col-lg-7 ">
-            <div class="logo">
-              <img src="assets/images/logo2.png" alt="logo">
+          <div class="flex items-center">
+            <div class="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center mr-3 shadow-lg">
+              <i class="fas fa-heart text-white"></i>
             </div>
+            <span class="text-xl font-bold text-white">Lovers'<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Vow</span></span>
           </div>
         </div>
       </div>
-    </div>
-    <div class="container">
-      <div class="row justify-content-end">
-        <div class="image">
+
+      <div class="flex flex-col lg:flex-row items-center justify-center">
+        <!-- Image Section (Hidden on mobile) -->
+        <div class="hidden lg:block lg:w-1/2 mb-10 lg:mb-0 lg:pr-12 animate__animated animate__fadeInLeft">
+          <div class="rounded-2xl overflow-hidden shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1588265583147-ee69bbb0c45c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fEZpbmQlMjBMb3ZlJTIwJTI2JTIwWW91ciUyMExpZmUlMjBQYXJ0bmVyfGVufDB8fDB8fHww" 
+                 alt="Happy couple" class="w-full h-auto object-cover">
+          </div>
+          <div class="mt-6 text-center">
+            <h3 class="text-2xl font-bold text-white mb-2">Join Our Community</h3>
+            <p class="text-gray-300">Find your perfect match among thousands of verified members</p>
+          </div>
         </div>
-        <div class="col-lg-7">
-          <div class="log-reg-inner">
-            <div class="section-header">
-              <h2 class="title">
-                Welcome to PEYAMBA
-              </h2>
-              <p>
-                Let's create your profile! Just fill in the fields below, and
-                we’ll get a new account.
+
+        <!-- Registration Form -->
+        <div class="w-full lg:w-1/2 animate__animated animate__fadeInRight">
+          <div class="card-dark rounded-2xl p-8 shadow-2xl">
+            <div class="text-center mb-8">
+              <h2 class="text-3xl font-bold text-white mb-2">Welcome to Lovers' Vow</h2>
+              <p class="text-gray-300">
+                Let's create your profile! Just fill in the fields below, and we'll get a new account.
               </p>
             </div>
-            <div class="main-content">
-              <form action="#">
-                <h4 class="content-title">Acount Details</h4>
-                <div class="form-group">
-                  <label for="">Username*</label>
-                  <input type="text" class="my-form-control" placeholder="Enter Your Usewrname">
-                </div>
-                <div class="form-group">
-                  <label for="">Email Address*</label>
-                  <input type="email" class="my-form-control" placeholder="Enter Your Email">
-                </div>
-                <div class="form-group">
-                  <label for="">Password*</label>
-                  <input type="text" class="my-form-control" placeholder="Enter Your Password">
-                </div>
-                <div class="form-group">
-                  <label for="">Confirm Password*</label>
-                  <input type="text" class="my-form-control" placeholder="Enter Your Password">
-                </div>
-                <h4 class="content-title mt-5">Profile Details</h4>
-                <div class="form-group">
-                  <label for="">Name*</label>
-                  <input type="text" class="my-form-control" placeholder="Enter Your Full Name">
-                </div>
-                <div class="form-group">
-                  <label for="">Birthday*</label>
-                  <input type="date" class="my-form-control">
-                </div>
-                <div class="form-group">
-                  <label for="">I am a*</label>
-                  <div class="option">
-                    <div class="s-input mr-3">
-                      <input type="radio" name="gender1" id="males1"><label for="males1">Man</label>
-                    </div>
-                    <div class="s-input">
-                      <input type="radio" name="gender1" id="females1"><label for="females1">Woman</label>
-                    </div>
+
+            <form action="#" id="registration-form">
+              <h4 class="text-xl font-bold text-white mb-4 pb-2 border-b border-gray-700">Account Details</h4>
+              
+              <div class="mb-4">
+                <label for="username" class="block text-gray-300 mb-2 font-medium">Username*</label>
+                <input type="text" id="username" class="w-full form-input rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter Your Username">
+              </div>
+
+              <div class="mb-4">
+                <label for="email" class="block text-gray-300 mb-2 font-medium">Email Address*</label>
+                <input type="email" id="email" class="w-full form-input rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter Your Email">
+              </div>
+
+              <div class="mb-4">
+                <label for="password" class="block text-gray-300 mb-2 font-medium">Password*</label>
+                <input type="password" id="password" class="w-full form-input rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter Your Password">
+              </div>
+
+              <div class="mb-6">
+                <label for="confirm-password" class="block text-gray-300 mb-2 font-medium">Confirm Password*</label>
+                <input type="password" id="confirm-password" class="w-full form-input rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter Your Password">
+              </div>
+
+              <h4 class="text-xl font-bold text-white mb-4 pb-2 border-b border-gray-700 mt-8">Profile Details</h4>
+              
+              <div class="mb-4">
+                <label for="fullname" class="block text-gray-300 mb-2 font-medium">Name*</label>
+                <input type="text" id="fullname" class="w-full form-input rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter Your Full Name">
+              </div>
+
+              <div class="mb-4">
+                <label for="birthday" class="block text-gray-300 mb-2 font-medium">Birthday*</label>
+                <input type="date" id="birthday" class="w-full form-input rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
+              </div>
+
+              <div class="mb-4">
+                <label class="block text-gray-300 mb-2 font-medium">I am a*</label>
+                <div class="flex flex-wrap">
+                  <div class="radio-option">
+                    <input type="radio" name="gender" id="male">
+                    <label for="male">Man</label>
+                  </div>
+                  <div class="radio-option">
+                    <input type="radio" name="gender" id="female">
+                    <label for="female">Woman</label>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="">Looking for a*</label>
-                  <div class="option">
-                    <div class="s-input mr-3">
-                      <input type="radio" name="gender2" id="males"><label for="males">Man</label>
-                    </div>
-                    <div class="s-input">
-                      <input type="radio" name="gender2" id="females"><label for="females">Woman</label>
-                    </div>
+              </div>
+
+              <div class="mb-4">
+                <label class="block text-gray-300 mb-2 font-medium">Looking for a*</label>
+                <div class="flex flex-wrap">
+                  <div class="radio-option">
+                    <input type="radio" name="seeking" id="seeking-male">
+                    <label for="seeking-male">Man</label>
+                  </div>
+                  <div class="radio-option">
+                    <input type="radio" name="seeking" id="seeking-female">
+                    <label for="seeking-female">Woman</label>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="">Marial status*</label>
-                  <div class="option">
-                    <div class="s-input nice-select-wraper">
-                      <select class="select-bar">
-                        <option value="">Single</option>
-                        <option value="">Marid</option>
-                        <option value="">Marid</option>
-                        <option value="">Marid</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="">City*</label>
-                  <input type="text" class="my-form-control" placeholder="Enter Your City">
-                </div>
-                <button class="custom-button" data-toggle="modal" data-target="#email-confirm">Create Your
-                  Profile</button>
-              </form>
-            </div>
+              </div>
+
+              <div class="mb-4">
+                <label for="marital-status" class="block text-gray-300 mb-2 font-medium">Marital status*</label>
+                <select id="marital-status" class="select-input">
+                  <option value="">Select your status</option>
+                  <option value="single">Single</option>
+                  <option value="married">Married</option>
+                  <option value="divorced">Divorced</option>
+                  <option value="widowed">Widowed</option>
+                </select>
+              </div>
+
+              <div class="mb-6">
+                <label for="city" class="block text-gray-300 mb-2 font-medium">City*</label>
+                <input type="text" id="city" class="w-full form-input rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter Your City">
+              </div>
+
+              <button type="button" id="create-profile-btn" class="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-amber-600 text-white font-bold py-3 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl">
+                Create Your Profile
+              </button>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- ========== Login & Registation Section ========== -->
+  <!-- ========== Registration Section ========== -->
 
   <!-- Modal -->
-  <div class="modal fade" id="email-confirm" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="top-img">
-            <img src="assets/images/c-image.png" alt="">
-          </div>
-          <div class="main-content">
-            <h4 class="title">
-              Check Your Inbox, Please!
-            </h4>
-            <p>
-              A link to verify account has been sent to the email supplied. Please open the link and follow the prompts
-              to verify
-              email.
-            </p>
-            <p class="send-again">
-              Didn't get e-mail? <a href="#">
-                Send it again
-              </a>
-            </p>
-          </div>
+  <div class="modal-overlay" id="email-confirm-modal">
+    <div class="modal-content">
+      <div class="text-center mb-6">
+        <div class="w-24 h-24 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-envelope text-white text-3xl"></i>
         </div>
+        <h4 class="text-2xl font-bold text-white mb-2">
+          Check Your Inbox, Please!
+        </h4>
+        <p class="text-gray-300">
+          A link to verify account has been sent to the email supplied. Please open the link and follow the prompts to verify email.
+        </p>
+        <p class="text-gray-400 mt-4">
+          Didn't get e-mail? 
+          <a href="#" class="text-primary hover:text-primary-dark transition-colors duration-300">
+            Send it again
+          </a>
+        </p>
+      </div>
+      <div class="text-center">
+        <button id="close-modal" class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-2 rounded-lg transition-colors duration-300">
+          Close
+        </button>
       </div>
     </div>
   </div>
 
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-  <script src="assets/js/jquery-3.3.1.min.js"></script>
-  <script src="assets/js/modernizr-3.6.0.min.js"></script>
-  <script src="assets/js/plugins.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
-  <script src="assets/js/heandline.js"></script>
-  <script src="assets/js/isotope.pkgd.min.js"></script>
-  <script src="assets/js/magnific-popup.min.js"></script>
-  <script src="assets/js/owl.carousel.min.js"></script>
-  <script src="assets/js/wow.min.js"></script>
-  <script src="assets/js/countdown.min.js"></script>
-  <script src="assets/js/odometer.min.js"></script>
-  <script src="assets/js/viewport.jquery.js"></script>
-  <script src="assets/js/nice-select.js"></script>
-  <script src="assets/js/main.js"></script>
-<script defer="" src="../../beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"6e6444122ed94892b6dff27396bb5627","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function () {
+      // Hide preloader
+      $('.preloader').fadeOut(500);
+
+      // Show modal when Create Profile button is clicked
+      $('#create-profile-btn').click(function() {
+        $('#email-confirm-modal').addClass('active');
+      });
+
+      // Close modal
+      $('#close-modal').click(function() {
+        $('#email-confirm-modal').removeClass('active');
+      });
+
+      // Close modal when clicking outside
+      $('#email-confirm-modal').click(function(e) {
+        if (e.target === this) {
+          $(this).removeClass('active');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
